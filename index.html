@@ -28,30 +28,33 @@
   --line:rgba(245,239,226,.16);
   --line-strong:rgba(245,239,226,.28);
   --shadow:0 30px 80px rgba(0,0,0,.45);
+  --header-h: clamp(64px, 6vh, 84px);
+  --footer-h: clamp(72px, 7vh, 96px);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;background:#000}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);margin:0}
 body{
-  display:grid;place-items:center;
   font-family:'Fraunces',Georgia,serif;
   -webkit-font-smoothing:antialiased;
   user-select:none;
 }
 
-.scaler{width:100vw;height:100vh;display:grid;place-items:center;background:#000;position:relative;overflow:hidden}
+.scaler{
+  width:100vw;height:100vh;
+  position:fixed;top:0;left:0;
+  overflow:hidden;
+}
 
 .kiosk{
-  width:1920px;height:1080px;
+  width:100%;height:100%;
   position:relative;
-  transform-origin:center center;
   background:
     radial-gradient(ellipse at 20% 0%, rgba(201,122,43,.08), transparent 50%),
     radial-gradient(ellipse at 80% 100%, rgba(47,107,101,.12), transparent 50%),
     linear-gradient(180deg, #0e1a2b 0%, #0a1422 100%);
   color:var(--ivory);
   overflow:hidden;
-  box-shadow:0 0 0 1px rgba(245,239,226,.05), 0 40px 120px rgba(0,0,0,.6);
 }
 .kiosk::before{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -72,11 +75,11 @@ body{
 /* ============ HEADER ============ */
 .header{
   position:absolute;top:0;left:0;right:0;
-  height:84px;z-index:30;
+  height:var(--header-h);z-index:30;
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
-  padding:0 56px;
+  padding:0 clamp(24px, 3vw, 56px);
   border-bottom:1px solid var(--line);
   background:linear-gradient(180deg, rgba(14,26,43,.96), rgba(14,26,43,.7));
   backdrop-filter:blur(8px);
@@ -86,34 +89,34 @@ body{
 .header-right{display:flex;align-items:center;gap:24px;justify-self:end}
 
 .brand-mark{
-  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  width:clamp(32px, 2.6vw, 56px);height:clamp(32px, 2.6vw, 56px);border-radius:50%;flex-shrink:0;
   background:radial-gradient(circle at 35% 35%, var(--saffron), var(--saffron-2));
   display:grid;place-items:center;
   box-shadow:0 6px 24px var(--saffron-glow), inset 0 -2px 6px rgba(0,0,0,.3);
   position:relative;
 }
 .brand-mark::after{content:"";position:absolute;inset:8px;border-radius:50%;border:1.5px solid rgba(245,239,226,.6)}
-.brand-mark svg{width:22px;height:22px}
+.brand-mark svg{width:clamp(16px, 1.2vw, 26px);height:clamp(16px, 1.2vw, 26px)}
 .brand-text{display:flex;flex-direction:column;line-height:1.1}
-.brand-text .top{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-family:'Inter',sans-serif;font-weight:500}
-.brand-text .main{font-size:22px;font-weight:500;color:var(--ivory)}
+.brand-text .top{font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-family:'Inter',sans-serif;font-weight:500}
+.brand-text .main{font-size:clamp(15px, 1.3vw, 22px);font-weight:500;color:var(--ivory)}
 
 .lang-switch{display:flex;gap:0;background:rgba(245,239,226,.06);border-radius:999px;padding:5px;border:1px solid var(--line)}
-.lang-btn{padding:11px 28px;border:none;background:transparent;color:var(--ivory);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:1px;border-radius:999px;cursor:pointer;transition:all .3s ease}
+.lang-btn{padding:11px 28px;border:none;background:transparent;color:var(--ivory);font-family:'Inter',sans-serif;font-size:clamp(10.9px, 0.729vw, 21.0px);font-weight:500;letter-spacing:1px;border-radius:999px;cursor:pointer;transition:all .3s ease}
 .lang-btn.active{background:var(--saffron);color:#fff;box-shadow:0 4px 16px var(--saffron-glow)}
 
 .clock-block{
   display:flex;flex-direction:column;align-items:flex-end;line-height:1.1;
 }
-.clock{font-family:'Inter',sans-serif;font-size:14px;color:var(--gold);letter-spacing:2px;font-weight:500}
+.clock{font-family:'Inter',sans-serif;font-size:clamp(10.9px, 0.729vw, 21.0px);color:var(--gold);letter-spacing:2px;font-weight:500}
 .weather{font-family:'Inter',sans-serif;font-size:10px;color:var(--ivory-2);opacity:.6;letter-spacing:1.5px;margin-top:3px;text-transform:uppercase}
 
 /* ============ FOOTER ============ */
 .footer{
   position:absolute;bottom:0;left:0;right:0;
-  height:96px;z-index:30;
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  padding:0 56px;
+  height:var(--footer-h);z-index:30;
+  display:flex;align-items:center;justify-content:center;gap:clamp(8px, 1vw, 14px);
+  padding:0 clamp(20px, 2.5vw, 56px);
   border-top:1px solid var(--line);
   background:linear-gradient(0deg, rgba(14,26,43,.96), rgba(14,26,43,.6));
   backdrop-filter:blur(8px);
@@ -165,18 +168,18 @@ body{
 
 .nav-btn{
   flex:0 0 auto;
-  min-width:220px;height:64px;
+  min-width:clamp(140px, 12vw, 220px);height:clamp(48px, 5vh, 64px);
   display:flex;align-items:center;justify-content:center;gap:14px;
-  font-size:17px;letter-spacing:.5px;padding:0 28px;
+  font-size:clamp(13px, 1.1vw, 17px);letter-spacing:.5px;padding:0 28px;
   font-family:'Fraunces',serif;font-weight:500;
 }
-.nav-btn .num{font-family:'Inter',sans-serif;font-size:11px;opacity:.55;letter-spacing:2px;font-weight:600}
+.nav-btn .num{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);opacity:.55;letter-spacing:2px;font-weight:600}
 .nav-btn.home{min-width:96px;padding:0}
 .nav-btn.home svg{width:24px;height:24px}
 .nav-btn[disabled]{opacity:.35;cursor:not-allowed;pointer-events:none}
 
 /* SCREEN */
-.screen{position:absolute;top:84px;left:0;right:0;bottom:96px;display:none;z-index:3;overflow:hidden}
+.screen{position:absolute;top:var(--header-h);left:0;right:0;bottom:var(--footer-h);display:none;z-index:3;overflow:hidden}
 .screen.active{display:block;animation:fadeIn .5s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
@@ -193,52 +196,52 @@ body{
 
 .welcome-left{
   grid-column:1;grid-row:1 / 3;
-  padding:32px 56px 32px 88px;
+  padding:clamp(28px, 3.5vw, 48px) clamp(32px, 4vw, 56px) clamp(28px, 3.5vw, 48px) clamp(48px, 5.5vw, 88px);
   display:flex;flex-direction:column;justify-content:center;
   position:relative;z-index:5;
 }
 .welcome-eyebrow{
-  font-family:'Inter',sans-serif;font-size:12px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  font-family:'Inter',sans-serif;font-size:clamp(9.4px, 0.625vw, 18.0px);letter-spacing:5px;
+  text-transform:uppercase;color:var(--gold);margin-bottom:clamp(14px, 1.2vw, 20px);
   display:flex;align-items:center;gap:14px;
 }
 .welcome-eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
 
 .welcome-title{
-  font-family:'Fraunces',serif;font-size:80px;line-height:.95;
+  font-family:'Fraunces',serif;font-size:clamp(48px, 4.5vw, 80px);line-height:.95;
   font-weight:400;letter-spacing:-2.5px;color:var(--ivory);
 }
 .welcome-title em{font-style:italic;color:var(--saffron);font-weight:300;display:block}
-[data-lang="hi"] .welcome-title{font-family:'Noto Serif Devanagari',serif;font-size:62px;line-height:1.15;letter-spacing:0}
-[data-lang="te"] .welcome-title{font-family:'Noto Serif Telugu',serif;font-size:58px;line-height:1.2;letter-spacing:0}
+[data-lang="hi"] .welcome-title{font-family:'Noto Serif Devanagari',serif;font-size:clamp(38px, 3.5vw, 62px);line-height:1.15;letter-spacing:0}
+[data-lang="te"] .welcome-title{font-family:'Noto Serif Telugu',serif;font-size:clamp(36px, 3.3vw, 58px);line-height:1.2;letter-spacing:0}
 
 /* Per-word reveal */
 .welcome-title .w{display:inline-block;opacity:0;transform:translateY(20px);animation:wordIn .9s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes wordIn{to{opacity:1;transform:translateY(0)}}
 
 .welcome-tagline{
-  margin-top:32px;font-size:23px;line-height:1.5;
+  margin-top:clamp(18px, 1.8vw, 28px);font-size:clamp(15px, 1.2vw, 21px);line-height:1.5;
   color:var(--ivory-2);opacity:0;max-width:560px;
   font-weight:300;font-style:italic;
   animation:fadeUp 1.2s .8s ease forwards;
 }
-[data-lang="hi"] .welcome-tagline, [data-lang="te"] .welcome-tagline{font-style:normal;font-size:20px}
+[data-lang="hi"] .welcome-tagline, [data-lang="te"] .welcome-tagline{font-style:normal;font-size:clamp(15.6px, 1.042vw, 30.0px)}
 [data-lang="hi"] .welcome-tagline{font-family:'Noto Serif Devanagari',serif}
 [data-lang="te"] .welcome-tagline{font-family:'Noto Serif Telugu',serif}
 @keyframes fadeUp{to{opacity:.85;transform:translateY(0)}from{opacity:0;transform:translateY(20px)}}
 
 /* Quote of the day card — rotates every 8s */
 .quote-card{
-  margin-top:48px;
+  margin-top:clamp(20px, 2vw, 32px);
   background:rgba(245,239,226,.04);
   border:1px solid var(--line);
   border-left:3px solid var(--saffron);
   border-radius:0 14px 14px 0;
-  padding:24px 32px;
+  padding:20px 28px 22px;
   max-width:560px;
   opacity:0;animation:fadeUp 1.2s 1.2s ease forwards;
   position:relative;
-  min-height:160px;
+  min-height:clamp(100px, 8vw, 150px);
 }
 .quote-card .quote-label{
   position:absolute;top:-10px;left:24px;
@@ -248,13 +251,13 @@ body{
   text-transform:uppercase;font-weight:600;
 }
 .quote-card .quote-text{
-  font-family:'Fraunces',serif;font-size:18px;line-height:1.6;
+  font-family:'Fraunces',serif;font-size:clamp(14px, 1.2vw, 18px);line-height:1.6;
   color:var(--ivory-2);font-style:italic;
   transition:opacity .5s ease;
 }
-[data-lang="hi"] .quote-card .quote-text{font-family:'Noto Serif Devanagari',serif;font-style:normal;font-size:16px}
-[data-lang="te"] .quote-card .quote-text{font-family:'Noto Serif Telugu',serif;font-style:normal;font-size:15px}
-.quote-card cite{display:block;margin-top:14px;font-style:normal;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+[data-lang="hi"] .quote-card .quote-text{font-family:'Noto Serif Devanagari',serif;font-style:normal;font-size:clamp(12.5px, 0.833vw, 24.0px)}
+[data-lang="te"] .quote-card .quote-text{font-family:'Noto Serif Telugu',serif;font-style:normal;font-size:clamp(11.7px, 0.781vw, 22.5px)}
+.quote-card cite{display:block;margin-top:14px;font-style:normal;font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
 .quote-dots{position:absolute;bottom:14px;right:18px;display:flex;gap:6px}
 .quote-dot{width:6px;height:6px;border-radius:50%;background:rgba(245,239,226,.2);transition:all .3s}
 .quote-dot.active{background:var(--saffron);transform:scale(1.4)}
@@ -263,21 +266,21 @@ body{
 .welcome-right{
   grid-column:2;grid-row:1;
   position:relative;display:grid;place-items:center;
-  padding:24px 56px 12px;
+  padding:clamp(24px, 3vw, 40px) clamp(32px, 4vw, 56px) clamp(12px, 1.5vw, 16px);
   background:radial-gradient(circle at center, rgba(201,122,43,.10), transparent 65%);
 }
 
 .welcome-cta-row{
   grid-column:2;grid-row:2;
   display:flex;justify-content:center;align-items:flex-start;
-  padding:0 56px 36px;
+  padding:0 clamp(32px, 4vw, 56px) clamp(24px, 2.8vw, 36px);
   z-index:5;
 }
 
 /* MONOGRAM */
 .monogram-frame{
   position:relative;
-  width:500px;height:620px;
+  width:clamp(320px, 26vw, 560px);height:clamp(400px, 32vw, 700px);
   display:grid;place-items:center;
 }
 .monogram-bg{
@@ -288,13 +291,13 @@ body{
     linear-gradient(180deg, rgba(245,239,226,.03), rgba(245,239,226,.01));
   box-shadow:inset 0 0 0 1px var(--gold), inset 0 0 0 9px rgba(14,26,43,.6), inset 0 0 0 10px var(--gold);
 }
-.monogram-corner{position:absolute;width:60px;height:60px;border:1px solid var(--gold)}
-.monogram-corner.tl{top:30px;left:30px;border-right:none;border-bottom:none}
-.monogram-corner.tr{top:30px;right:30px;border-left:none;border-bottom:none}
-.monogram-corner.bl{bottom:30px;left:30px;border-right:none;border-top:none}
-.monogram-corner.br{bottom:30px;right:30px;border-left:none;border-top:none}
+.monogram-corner{position:absolute;width:clamp(36px, 3vw, 72px);height:clamp(36px, 3vw, 72px);border:1px solid var(--gold)}
+.monogram-corner.tl{top:clamp(18px, 1.6vw, 36px);left:clamp(18px, 1.6vw, 36px);border-right:none;border-bottom:none}
+.monogram-corner.tr{top:clamp(18px, 1.6vw, 36px);right:clamp(18px, 1.6vw, 36px);border-left:none;border-bottom:none}
+.monogram-corner.bl{bottom:clamp(18px, 1.6vw, 36px);left:clamp(18px, 1.6vw, 36px);border-right:none;border-top:none}
+.monogram-corner.br{bottom:clamp(18px, 1.6vw, 36px);right:clamp(18px, 1.6vw, 36px);border-left:none;border-top:none}
 
-.monogram-svg{position:relative;z-index:2;width:380px;height:480px;animation:monoFloat 8s ease-in-out infinite}
+.monogram-svg{position:relative;z-index:2;width:clamp(240px, 20vw, 440px);height:clamp(300px, 25vw, 540px);animation:monoFloat 8s ease-in-out infinite}
 .monogram-svg svg{width:100%;height:100%;color:var(--saffron)}
 @keyframes monoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
@@ -302,18 +305,18 @@ body{
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .monogram-caption{
-  position:absolute;bottom:54px;left:0;right:0;
+  position:absolute;bottom:clamp(32px, 2.8vw, 70px);left:0;right:0;
   text-align:center;font-family:'Cormorant Garamond',serif;color:var(--gold);
 }
-.monogram-caption .name{font-size:22px;letter-spacing:5px;font-weight:500}
-.monogram-caption .years{font-size:12px;letter-spacing:7px;margin-top:6px;font-family:'Inter',sans-serif;font-weight:500}
+.monogram-caption .name{font-size:clamp(17.2px, 1.146vw, 33.0px);letter-spacing:5px;font-weight:500}
+.monogram-caption .years{font-size:clamp(9.4px, 0.625vw, 18.0px);letter-spacing:7px;margin-top:6px;font-family:'Inter',sans-serif;font-weight:500}
 
 /* START CTA — no longer absolute-positioned */
 .start-cta{
-  padding:20px 56px;
+  padding:clamp(14px, 1.2vw, 22px) clamp(36px, 3.4vw, 64px);
   background:linear-gradient(180deg, var(--saffron), var(--saffron-2));
   color:#fff;border:none;border-radius:999px;
-  font-family:'Inter',sans-serif;font-size:14px;letter-spacing:3px;
+  font-family:'Inter',sans-serif;font-size:clamp(10.9px, 0.729vw, 21.0px);letter-spacing:3px;
   text-transform:uppercase;font-weight:700;cursor:pointer;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.3),
@@ -336,115 +339,140 @@ body{
 .chakra-bg-deco{
   position:absolute;
   right:8%;top:50%;transform:translateY(-50%);
-  width:520px;height:520px;opacity:.04;pointer-events:none;z-index:0;
+  width:clamp(320px, 27vw, 620px);height:clamp(320px, 27vw, 620px);opacity:.04;pointer-events:none;z-index:0;
 }
 .chakra-bg-deco svg{width:100%;height:100%;color:var(--saffron);animation:spin 120s linear infinite}
 
 /* ============ TIMELINE ============ */
-#screen-timeline{padding:32px 64px 0;display:none;flex-direction:column;height:100%}
+#screen-timeline{padding:clamp(24px, 2.6vw, 36px) clamp(28px, 3.4vw, 56px) clamp(20px, 2.2vw, 32px);display:none;flex-direction:column;height:100%;gap:clamp(14px, 1.4vw, 20px)}
 #screen-timeline.active{display:flex}
 
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-shrink:0}
-.section-head .eyebrow{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold)}
-.section-head h2{font-family:'Fraunces',serif;font-size:52px;font-weight:400;letter-spacing:-1.5px;color:var(--ivory);margin-top:8px;line-height:1}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-shrink:0;margin-bottom:0}
+.section-head > div:first-child{display:flex;flex-direction:column;gap:8px}
+.section-head .eyebrow{font-family:'Inter',sans-serif;font-size:clamp(9.4px, 0.625vw, 18.0px);letter-spacing:5px;text-transform:uppercase;color:var(--gold)}
+.section-head h2{font-family:'Fraunces',serif;font-size:clamp(28px, 2.8vw, 46px);font-weight:400;letter-spacing:-1.5px;color:var(--ivory);line-height:1;margin:0}
 .section-head h2 em{color:var(--saffron);font-style:italic;font-weight:300}
-[data-lang="hi"] .section-head h2{font-family:'Noto Serif Devanagari',serif;font-size:42px;letter-spacing:0}
-[data-lang="te"] .section-head h2{font-family:'Noto Serif Telugu',serif;font-size:40px;letter-spacing:0}
-.section-hint{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--gold);opacity:.7;display:flex;align-items:center;gap:14px}
+[data-lang="hi"] .section-head h2{font-family:'Noto Serif Devanagari',serif;font-size:clamp(24px, 2.3vw, 38px);letter-spacing:0}
+[data-lang="te"] .section-head h2{font-family:'Noto Serif Telugu',serif;font-size:clamp(22px, 2.2vw, 36px);letter-spacing:0}
+.section-hint{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2px;color:var(--gold);opacity:.7;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
 
-/* Year range bar — shows progress through 1891-1956 */
 .year-progress{
   display:flex;align-items:center;gap:14px;
   background:rgba(245,239,226,.04);border:1px solid var(--line);
   padding:8px 18px;border-radius:999px;
 }
 .year-progress .yr{font-family:'Inter',sans-serif;font-size:10px;color:var(--gold);font-weight:600;letter-spacing:1px}
-.year-progress .bar{width:160px;height:3px;background:rgba(245,239,226,.1);border-radius:3px;overflow:hidden;position:relative}
+.year-progress .bar{width:clamp(100px, 10vw, 160px);height:3px;background:rgba(245,239,226,.1);border-radius:3px;overflow:hidden;position:relative}
 .year-progress .bar-fill{position:absolute;left:0;top:0;bottom:0;background:var(--saffron);border-radius:3px;width:0;transition:width .5s cubic-bezier(.4,0,.2,1)}
 .year-progress .bar-dot{position:absolute;top:50%;left:0;width:10px;height:10px;border-radius:50%;background:var(--saffron);transform:translate(-50%,-50%);box-shadow:0 0 12px var(--saffron);transition:left .5s cubic-bezier(.4,0,.2,1)}
 
-.timeline{position:relative;margin-top:8px;padding:32px 0 16px;overflow-x:auto;overflow-y:hidden;flex-shrink:0}
+.timeline{position:relative;padding:8px 0 12px;overflow-x:auto;overflow-y:hidden;flex-shrink:1;min-height:0}
 .timeline::-webkit-scrollbar{height:8px}
 .timeline::-webkit-scrollbar-track{background:rgba(245,239,226,.05);border-radius:4px}
 .timeline::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:4px}
 
-.timeline-track{position:relative;display:flex;align-items:stretch;min-width:max-content;padding-bottom:20px}
+.timeline-track{position:relative;display:flex;align-items:stretch;min-width:max-content;padding-bottom:12px}
+/* The line goes through the centre of the .dot row — dot is 20px tall, with margins above (year + age) */
 .timeline-track::before{
-  content:"";position:absolute;left:0;right:0;top:114px;height:2px;
+  content:"";position:absolute;left:0;right:0;
+  top:calc(clamp(24px, 2.2vw, 38px) + 10px + clamp(10px, 1vw, 14px) + 6px + clamp(8px, 0.8vw, 12px) + 10px);
+  height:2px;
   background:linear-gradient(90deg, transparent 0%, var(--saffron) 5%, var(--saffron) 95%, transparent 100%);
 }
-.tl-event{flex:0 0 240px;position:relative;padding:0 22px;cursor:pointer;transition:transform .25s ease}
-.tl-event:hover{transform:translateY(-4px)}
-.tl-event .year{font-family:'Fraunces',serif;font-size:38px;font-weight:500;color:var(--ivory);letter-spacing:-1px;margin-bottom:10px;transition:color .2s}
+.tl-event{flex:0 0 clamp(180px, 14vw, 220px);position:relative;padding:0 clamp(12px, 1.2vw, 20px);cursor:pointer;transition:transform .25s ease;display:flex;flex-direction:column;align-items:center;text-align:center}
+.tl-event:hover{transform:translateY(-3px)}
+.tl-event .year{font-family:'Fraunces',serif;font-size:clamp(24px, 2.2vw, 36px);font-weight:500;color:var(--ivory);letter-spacing:-1px;margin-bottom:6px;line-height:1;transition:color .2s}
 .tl-event.active .year{color:var(--saffron)}
-.tl-event .age{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
-.tl-event .dot{width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid var(--saffron);margin:0 auto 24px;box-shadow:0 0 0 6px var(--ink), 0 0 0 7px var(--line);transition:all .25s ease;position:relative;z-index:2}
-.tl-event:hover .dot, .tl-event.active .dot{background:var(--saffron);transform:scale(1.2);box-shadow:0 0 0 6px var(--ink), 0 0 16px var(--saffron-glow)}
-.tl-event .label{font-family:'Fraunces',serif;font-size:16px;line-height:1.4;font-weight:500;color:var(--ivory);text-align:center}
-[data-lang="hi"] .tl-event .label{font-family:'Noto Serif Devanagari',serif;font-size:14px}
-[data-lang="te"] .tl-event .label{font-family:'Noto Serif Telugu',serif;font-size:13px}
-.tl-event .loc{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.7;text-align:center;margin-top:8px}
+.tl-event .age{font-family:'Inter',sans-serif;font-size:clamp(8px, 0.7vw, 10px);letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(8px, 0.8vw, 12px)}
+.tl-event .dot{width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid var(--saffron);margin:0 0 clamp(12px, 1.4vw, 20px);box-shadow:0 0 0 6px var(--ink), 0 0 0 7px var(--line);transition:all .25s ease;position:relative;z-index:2}
+.tl-event:hover .dot, .tl-event.active .dot{background:var(--saffron);transform:scale(1.15);box-shadow:0 0 0 6px var(--ink), 0 0 16px var(--saffron-glow)}
+.tl-event .label{font-family:'Fraunces',serif;font-size:clamp(13px, 1.1vw, 15px);line-height:1.35;font-weight:500;color:var(--ivory)}
+[data-lang="hi"] .tl-event .label{font-family:'Noto Serif Devanagari',serif;font-size:clamp(12px, 1vw, 14px)}
+[data-lang="te"] .tl-event .label{font-family:'Noto Serif Telugu',serif;font-size:clamp(11px, 0.95vw, 13px)}
+.tl-event .loc{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:6px}
 
 .tl-detail{
-  margin-top:auto;margin-bottom:24px;
-  background:rgba(245,239,226,.05);border:1px solid var(--line);border-radius:16px;
-  padding:24px 36px;display:grid;
-  grid-template-columns:120px 1fr auto;
-  gap:32px;align-items:center;
+  margin-top:auto;margin-bottom:0;
+  background:linear-gradient(180deg, rgba(245,239,226,.06), rgba(245,239,226,.03));border:1px solid var(--line);border-radius:16px;
+  padding:clamp(12px, 1.2vw, 18px) clamp(18px, 2vw, 26px);display:grid;
+  grid-template-columns:clamp(120px, 11vw, 170px) 1fr clamp(200px, 20vw, 280px);
+  gap:clamp(16px, 1.8vw, 24px);align-items:stretch;
   flex-shrink:0;
-  min-height:140px;
+  position:relative;
+  overflow:hidden;
+  max-height:clamp(160px, 24vh, 220px);
 }
-.tl-detail .big-year{font-family:'Fraunces',serif;font-size:64px;font-weight:300;color:var(--saffron);letter-spacing:-2px;line-height:1}
-.tl-detail .body{min-width:0}
-.tl-detail .body h3{font-family:'Fraunces',serif;font-size:24px;font-weight:500;color:var(--ivory);margin-bottom:6px}
-[data-lang="hi"] .tl-detail .body h3{font-family:'Noto Serif Devanagari',serif;font-size:20px}
-[data-lang="te"] .tl-detail .body h3{font-family:'Noto Serif Telugu',serif;font-size:19px}
-.tl-detail .body p{font-size:15px;line-height:1.55;color:var(--ivory-2);opacity:.85;max-width:1100px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-[data-lang="hi"] .tl-detail .body p{font-family:'Noto Serif Devanagari',serif;font-size:14px}
-[data-lang="te"] .tl-detail .body p{font-family:'Noto Serif Telugu',serif;font-size:13px}
-.tl-detail .more{padding:14px 26px;border-radius:999px;background:transparent;border:1px solid var(--saffron);color:var(--saffron);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;align-self:center}
+.tl-detail::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%, rgba(201,122,43,.06), transparent 60%);pointer-events:none}
+.tl-d-left{display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--line);padding-right:clamp(14px, 1.6vw, 22px);position:relative;z-index:1;overflow:hidden}
+.tl-d-left .big-year{font-family:'Fraunces',serif;font-size:clamp(34px, 3.4vw, 52px);font-weight:300;color:var(--saffron);letter-spacing:-2px;line-height:1;margin-bottom:6px}
+.tl-d-left .tl-d-loc{font-family:'Inter',sans-serif;font-size:clamp(9px, 0.85vw, 11px);letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px}
+.tl-d-left .tl-d-age{font-family:'Fraunces',serif;font-size:clamp(11px, 0.95vw, 13px);color:var(--ivory-2);opacity:.7;font-style:italic}
+
+.tl-detail .body{min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;overflow:hidden}
+.tl-d-eyebrow{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:5px;opacity:.85}
+.tl-detail .body h3{font-family:'Fraunces',serif;font-size:clamp(16px, 1.5vw, 21px);font-weight:500;color:var(--ivory);margin-bottom:6px;letter-spacing:-.3px;line-height:1.2}
+[data-lang="hi"] .tl-detail .body h3{font-family:'Noto Serif Devanagari',serif;font-size:clamp(14px, 1.3vw, 19px)}
+[data-lang="te"] .tl-detail .body h3{font-family:'Noto Serif Telugu',serif;font-size:clamp(14px, 1.3vw, 18px)}
+.tl-detail .body p{font-size:clamp(11px, 0.95vw, 13px);line-height:1.5;color:var(--ivory-2);opacity:.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:clamp(8px, 1vw, 12px)}
+[data-lang="hi"] .tl-detail .body p{font-family:'Noto Serif Devanagari',serif;font-size:clamp(10px, 0.9vw, 12px)}
+[data-lang="te"] .tl-detail .body p{font-family:'Noto Serif Telugu',serif;font-size:clamp(10px, 0.85vw, 11.5px)}
+
+.tl-d-facts{display:flex;gap:clamp(10px, 1.2vw, 18px);flex-wrap:wrap;padding-top:clamp(6px, 0.8vw, 10px);border-top:1px solid var(--line);margin-top:auto}
+.tl-d-fact{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tl-d-fact .lbl{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:600;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-d-fact .val{font-family:'Fraunces',serif;font-size:clamp(12px, 1vw, 14px);color:var(--ivory);font-weight:500;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.tl-d-side{display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid var(--line);padding-left:clamp(14px, 1.6vw, 22px);position:relative;z-index:1;gap:10px;min-height:0;overflow:hidden}
+.tl-d-quote-block{position:relative;padding:6px 0 0 18px;min-height:0;overflow:hidden}
+.tl-d-quote-block .tl-d-quote-mark{position:absolute;top:-6px;left:0;font-family:'Fraunces',serif;font-size:clamp(36px, 3.4vw, 48px);color:var(--saffron);opacity:.4;line-height:.8;font-style:italic}
+.tl-d-quote-block .tl-d-quote-text{font-family:'Fraunces',serif;font-size:clamp(11px, 1vw, 13px);font-style:italic;line-height:1.45;color:var(--ivory-2);margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+[data-lang="hi"] .tl-d-quote-block .tl-d-quote-text{font-family:'Noto Serif Devanagari',serif;font-style:normal;font-size:clamp(10px, 0.9vw, 12px)}
+[data-lang="te"] .tl-d-quote-block .tl-d-quote-text{font-family:'Noto Serif Telugu',serif;font-style:normal;font-size:clamp(10px, 0.85vw, 11.5px)}
+.tl-d-quote-block .tl-d-quote-src{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:600;opacity:.75}
+
+.tl-detail .more{padding:clamp(8px, 1vw, 12px) clamp(16px, 1.8vw, 22px);border-radius:999px;background:transparent;border:1px solid var(--saffron);color:var(--saffron);font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:10px;align-self:flex-start;flex-shrink:0}
 .tl-detail .more:hover{background:var(--saffron);color:#fff}
 
 /* ============ CONSTITUTION ============ */
 #screen-constitution{display:none;grid-template-columns:1.35fr 1fr;height:100%}
 #screen-constitution.active{display:grid}
 
-.const-left{padding:32px 40px 32px 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.const-eyebrow{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.const-left{padding:clamp(24px, 2.8vw, 40px) clamp(20px, 2.4vw, 36px) clamp(24px, 2.8vw, 40px) clamp(36px, 4.5vw, 72px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;gap:clamp(10px, 1vw, 16px)}
+.const-eyebrow{font-family:'Inter',sans-serif;font-size:clamp(9.4px, 0.625vw, 18.0px);letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:0}
 .const-eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
-.const-title{font-family:'Fraunces',serif;font-size:58px;line-height:1.05;font-weight:400;color:var(--ivory);letter-spacing:-1.5px;margin-bottom:24px}
+.const-title{font-family:'Fraunces',serif;font-size:clamp(34px, 3.2vw, 54px);line-height:1.05;font-weight:400;color:var(--ivory);letter-spacing:-1.5px;margin-bottom:0}
 .const-title em{color:var(--saffron);font-style:italic;font-weight:300}
-[data-lang="hi"] .const-title{font-family:'Noto Serif Devanagari',serif;font-size:44px;letter-spacing:0}
-[data-lang="te"] .const-title{font-family:'Noto Serif Telugu',serif;font-size:42px;letter-spacing:0}
+[data-lang="hi"] .const-title{font-family:'Noto Serif Devanagari',serif;font-size:clamp(28px, 2.6vw, 42px);letter-spacing:0}
+[data-lang="te"] .const-title{font-family:'Noto Serif Telugu',serif;font-size:clamp(26px, 2.4vw, 40px);letter-spacing:0}
 
-.const-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:20px 0 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
-.const-stat{padding:0 20px;border-right:1px solid var(--line);text-align:left}
+.const-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(12px, 1.4vw, 18px) 0}
+.const-stat{padding:0 clamp(12px, 1.4vw, 20px);border-right:1px solid var(--line);text-align:left}
 .const-stat:last-child{border-right:none}
-.const-stat .num{font-family:'Fraunces',serif;font-size:40px;font-weight:400;color:var(--saffron);letter-spacing:-1px;line-height:1}
-.const-stat .lbl{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ivory-2);opacity:.7;margin-top:8px}
+.const-stat .num{font-family:'Fraunces',serif;font-size:clamp(26px, 2.4vw, 38px);font-weight:400;color:var(--saffron);letter-spacing:-1px;line-height:1}
+.const-stat .lbl{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ivory-2);opacity:.7;margin-top:6px}
 
-.const-body{font-size:16px;line-height:1.7;color:var(--ivory-2);max-width:680px;margin-bottom:8px}
-.const-body p{margin-bottom:12px}
-[data-lang="hi"] .const-body{font-family:'Noto Serif Devanagari',serif;font-size:15px}
-[data-lang="te"] .const-body{font-family:'Noto Serif Telugu',serif;font-size:14px}
+.const-body{font-size:clamp(13px, 1.05vw, 15px);line-height:1.55;color:var(--ivory-2);max-width:680px;margin-bottom:0}
+.const-body p{margin-bottom:0}
+[data-lang="hi"] .const-body{font-family:'Noto Serif Devanagari',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
+[data-lang="te"] .const-body{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.1px, 0.677vw, 19.5px)}
 
-.preamble-pull{margin-top:8px;padding:20px 28px;background:linear-gradient(135deg, rgba(201,122,43,.12), rgba(201,122,43,.03));border-left:3px solid var(--saffron);border-radius:0 12px 12px 0}
-.preamble-pull .word-row{display:flex;flex-wrap:wrap;gap:24px}
-.preamble-pull .word{font-family:'Fraunces',serif;font-size:28px;font-weight:500;color:var(--saffron);letter-spacing:-.5px}
-.preamble-pull .desc{display:block;margin-top:12px;font-size:13px;color:var(--ivory-2);opacity:.85;line-height:1.5}
+.preamble-pull{margin-top:0;padding:clamp(14px, 1.4vw, 20px) clamp(20px, 2vw, 28px);background:linear-gradient(135deg, rgba(201,122,43,.12), rgba(201,122,43,.03));border-left:3px solid var(--saffron);border-radius:0 12px 12px 0}
+.preamble-pull .word-row{display:flex;flex-wrap:wrap;gap:clamp(14px, 1.5vw, 22px)}
+.preamble-pull .word{font-family:'Fraunces',serif;font-size:clamp(20px, 1.8vw, 26px);font-weight:500;color:var(--saffron);letter-spacing:-.5px}
+.preamble-pull .desc{display:block;margin-top:10px;font-size:clamp(9.8px, 0.651vw, 18.8px);color:var(--ivory-2);opacity:.85;line-height:1.5}
 
-.const-actions{display:flex;gap:12px;margin-top:24px;justify-content:flex-start}
-.const-actions .btn{padding:14px 24px;min-height:54px;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
-.const-actions .btn svg{width:18px;height:18px}
+.const-actions{display:flex;gap:10px;margin-top:0;justify-content:flex-start;flex-wrap:wrap}
+.const-actions .btn{padding:clamp(10px, 1.1vw, 14px) clamp(18px, 1.8vw, 22px);min-height:48px;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.const-actions .btn svg{width:16px;height:16px}
 
-.const-right{position:relative;padding:48px;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 80% 30%, rgba(245,239,226,.06), transparent 60%)}
-.book-frame{position:relative;width:100%;max-width:400px;margin:0 auto;perspective:1200px}
+.const-right{position:relative;padding:clamp(24px, 3vw, 42px);display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 80% 30%, rgba(245,239,226,.06), transparent 60%);overflow:hidden}
+.book-frame{position:relative;width:100%;max-width:min(360px, 80%);margin:0 auto;perspective:1200px}
 .book{
   position:relative;width:100%;aspect-ratio:.72;
   background:linear-gradient(135deg, #6b3018 0%, #4a1f0e 60%, #8a4523 100%);
   border-radius:4px 12px 12px 4px;
   box-shadow:-8px 0 0 #3a1808, var(--shadow);
-  padding:44px 36px 44px 56px;
+  padding:clamp(28px, 3.2vw, 44px) clamp(22px, 2.4vw, 36px) clamp(28px, 3.2vw, 44px) clamp(36px, 4vw, 56px);
   display:flex;flex-direction:column;justify-content:space-between;
   transform:rotateY(-8deg);transform-style:preserve-3d;
   cursor:pointer;
@@ -452,18 +480,18 @@ body{
 }
 .book:hover{transform:rotateY(-2deg) translateY(-6px)}
 .book::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:repeating-linear-gradient(180deg, #3a1808 0 6px, #2a0f04 6px 12px);border-radius:4px 0 0 4px}
-.book .ornament{width:64px;height:64px;align-self:center;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;position:relative}
+.book .ornament{width:clamp(40px, 3.4vw, 76px);height:clamp(40px, 3.4vw, 76px);align-self:center;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;position:relative}
 .book .ornament::before, .book .ornament::after{content:"";position:absolute;width:88px;height:1px;background:var(--gold);opacity:.5}
 .book .ornament::before{transform:rotate(0)}
 .book .ornament::after{transform:rotate(90deg)}
-.book .ornament svg{width:34px;height:34px;color:var(--gold);position:relative;z-index:2;background:#4a1f0e;padding:4px;border-radius:50%;animation:spin 80s linear infinite}
+.book .ornament svg{width:clamp(22px, 1.8vw, 40px);height:clamp(22px, 1.8vw, 40px);color:var(--gold);position:relative;z-index:2;background:#4a1f0e;padding:4px;border-radius:50%;animation:spin 80s linear infinite}
 .book-title{text-align:center;color:var(--gold);font-family:'Fraunces',serif}
-.book-title .top{font-size:12px;letter-spacing:6px;text-transform:uppercase;margin-bottom:18px;opacity:.8}
-.book-title .main{font-size:28px;font-weight:500;letter-spacing:1px;line-height:1.2}
-.book-title em{display:block;font-style:italic;font-size:14px;margin-top:8px;opacity:.85;font-weight:300}
-.book-date{text-align:center;color:var(--gold);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;border-top:1px solid rgba(169,131,65,.3);padding-top:14px}
+.book-title .top{font-size:clamp(9.4px, 0.625vw, 18.0px);letter-spacing:6px;text-transform:uppercase;margin-bottom:18px;opacity:.8}
+.book-title .main{font-size:clamp(21.8px, 1.458vw, 42.0px);font-weight:500;letter-spacing:1px;line-height:1.2}
+.book-title em{display:block;font-style:italic;font-size:clamp(10.9px, 0.729vw, 21.0px);margin-top:8px;opacity:.85;font-weight:300}
+.book-date{text-align:center;color:var(--gold);font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2px;border-top:1px solid rgba(169,131,65,.3);padding-top:14px}
 
-.book-hint{text-align:center;margin-top:20px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--gold);opacity:.5;text-transform:uppercase}
+.book-hint{text-align:center;margin-top:clamp(15.0px, 1.042vw, 30.0px);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--gold);opacity:.5;text-transform:uppercase}
 
 /* ============ MODAL ============ */
 .modal-backdrop{position:absolute;inset:0;z-index:100;background:rgba(14,26,43,.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:80px;animation:fadeIn .3s ease}
@@ -472,11 +500,11 @@ body{
 @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 
 .modal-head{display:flex;justify-content:space-between;align-items:center;padding:24px 36px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(245,239,226,.04), transparent);flex-shrink:0}
-.modal-head .title-wrap .eyebrow{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.modal-head h3{font-family:'Fraunces',serif;font-size:26px;font-weight:500;color:var(--ivory);letter-spacing:-.5px}
-[data-lang="hi"] .modal-head h3{font-family:'Noto Serif Devanagari',serif;font-size:22px}
-[data-lang="te"] .modal-head h3{font-family:'Noto Serif Telugu',serif;font-size:20px}
-.modal-close{width:48px;height:48px;border-radius:50%;background:rgba(245,239,226,.08);border:1px solid var(--line-strong);color:var(--ivory);cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.modal-head .title-wrap .eyebrow{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.modal-head h3{font-family:'Fraunces',serif;font-size:clamp(20.3px, 1.354vw, 39.0px);font-weight:500;color:var(--ivory);letter-spacing:-.5px}
+[data-lang="hi"] .modal-head h3{font-family:'Noto Serif Devanagari',serif;font-size:clamp(17.2px, 1.146vw, 33.0px)}
+[data-lang="te"] .modal-head h3{font-family:'Noto Serif Telugu',serif;font-size:clamp(15.6px, 1.042vw, 30.0px)}
+.modal-close{width:clamp(36px, 2.6vw, 56px);height:clamp(36px, 2.6vw, 56px);border-radius:50%;background:rgba(245,239,226,.08);border:1px solid var(--line-strong);color:var(--ivory);cursor:pointer;display:grid;place-items:center;transition:all .2s}
 .modal-close:hover{background:var(--saffron);border-color:var(--saffron);transform:rotate(90deg)}
 .modal-close svg{width:20px;height:20px}
 .modal-body{flex:1;overflow-y:auto;padding:32px 40px}
@@ -491,21 +519,21 @@ body{
   background-image:linear-gradient(180deg, rgba(14,26,43,.02), transparent),url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='1.2'/%3E%3CfeColorMatrix values='0 0 0 0 0.4, 0 0 0 0 0.3, 0 0 0 0 0.2, 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .preamble-doc .stamp{position:absolute;top:24px;right:24px;width:80px;height:80px;border:2px solid var(--saffron);border-radius:50%;display:grid;place-items:center;font-family:'Inter',sans-serif;color:var(--saffron);font-size:9px;letter-spacing:2px;text-align:center;opacity:.7;text-transform:uppercase;font-weight:600;transform:rotate(-12deg);line-height:1.2}
-.preamble-doc .heading{text-align:center;margin-bottom:28px}
-.preamble-doc .heading .top{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:6px;color:var(--gold);font-weight:600}
-.preamble-doc .heading h2{font-family:'Fraunces',serif;font-size:38px;color:var(--ink);margin:10px 0;font-weight:500;letter-spacing:-1px}
-[data-lang="hi"] .preamble-doc .heading h2{font-family:'Noto Serif Devanagari',serif;font-size:32px}
-[data-lang="te"] .preamble-doc .heading h2{font-family:'Noto Serif Telugu',serif;font-size:30px}
+.preamble-doc .heading{text-align:center;margin-bottom:clamp(21.0px, 1.458vw, 42.0px)}
+.preamble-doc .heading .top{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:6px;color:var(--gold);font-weight:600}
+.preamble-doc .heading h2{font-family:'Fraunces',serif;font-size:clamp(29.6px, 1.979vw, 57.0px);color:var(--ink);margin:10px 0;font-weight:500;letter-spacing:-1px}
+[data-lang="hi"] .preamble-doc .heading h2{font-family:'Noto Serif Devanagari',serif;font-size:clamp(25.0px, 1.667vw, 48.0px)}
+[data-lang="te"] .preamble-doc .heading h2{font-family:'Noto Serif Telugu',serif;font-size:clamp(23.4px, 1.562vw, 45.0px)}
 .preamble-doc .heading .sub{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:4px;color:var(--saffron);font-weight:600;text-transform:uppercase}
-.preamble-doc .body{font-size:18px;color:var(--ink);max-width:680px;margin:0 auto;text-align:justify}
-.preamble-doc .body .we{font-size:28px;font-weight:600;display:block;text-align:center;margin-bottom:16px;color:var(--saffron);letter-spacing:1px}
-[data-lang="hi"] .preamble-doc .body{font-family:'Noto Serif Devanagari',serif;font-size:16px}
-[data-lang="te"] .preamble-doc .body{font-family:'Noto Serif Telugu',serif;font-size:15px}
-.preamble-doc .signature{text-align:right;margin-top:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--ink-3)}
-.preamble-doc .date{text-align:center;margin-top:20px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;color:var(--saffron);text-transform:uppercase;font-weight:600}
+.preamble-doc .body{font-size:clamp(14.0px, 0.938vw, 27.0px);color:var(--ink);max-width:680px;margin:0 auto;text-align:justify}
+.preamble-doc .body .we{font-size:clamp(21.8px, 1.458vw, 42.0px);font-weight:600;display:block;text-align:center;margin-bottom:16px;color:var(--saffron);letter-spacing:1px}
+[data-lang="hi"] .preamble-doc .body{font-family:'Noto Serif Devanagari',serif;font-size:clamp(12.5px, 0.833vw, 24.0px)}
+[data-lang="te"] .preamble-doc .body{font-family:'Noto Serif Telugu',serif;font-size:clamp(11.7px, 0.781vw, 22.5px)}
+.preamble-doc .signature{text-align:right;margin-top:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(11.7px, 0.781vw, 22.5px);color:var(--ink-3)}
+.preamble-doc .date{text-align:center;margin-top:20px;font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:4px;color:var(--saffron);text-transform:uppercase;font-weight:600}
 
 /* ARTICLES */
-.articles-grid{display:grid;grid-template-columns:280px 1fr;gap:24px;height:480px}
+.articles-grid{display:grid;grid-template-columns:clamp(220px, 18vw, 320px) 1fr;gap:clamp(16px, 1.4vw, 28px);height:clamp(380px, 36vh, 540px)}
 .articles-list{background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;padding:14px;overflow-y:auto}
 .articles-list::-webkit-scrollbar{width:4px}
 .articles-list::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:2px}
@@ -513,61 +541,62 @@ body{
 .article-item:hover{background:rgba(245,239,226,.06)}
 .article-item.active{background:rgba(201,122,43,.15);border-color:var(--saffron)}
 .article-item .no{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:4px}
-.article-item .ttl{font-family:'Fraunces',serif;font-size:14px;color:var(--ivory);line-height:1.3}
-[data-lang="hi"] .article-item .ttl{font-family:'Noto Serif Devanagari',serif;font-size:13px}
-[data-lang="te"] .article-item .ttl{font-family:'Noto Serif Telugu',serif;font-size:12px}
+.article-item .ttl{font-family:'Fraunces',serif;font-size:clamp(10.9px, 0.729vw, 21.0px);color:var(--ivory);line-height:1.3}
+[data-lang="hi"] .article-item .ttl{font-family:'Noto Serif Devanagari',serif;font-size:clamp(10.1px, 0.677vw, 19.5px)}
+[data-lang="te"] .article-item .ttl{font-family:'Noto Serif Telugu',serif;font-size:clamp(9.4px, 0.625vw, 18.0px)}
 
 .article-detail{background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;padding:32px;overflow-y:auto}
 .article-detail::-webkit-scrollbar{width:4px}
 .article-detail::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:2px}
-.article-detail .ar-no{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:8px}
-.article-detail h4{font-family:'Fraunces',serif;font-size:28px;color:var(--ivory);font-weight:500;letter-spacing:-.5px;margin-bottom:18px}
-[data-lang="hi"] .article-detail h4{font-family:'Noto Serif Devanagari',serif;font-size:22px}
-[data-lang="te"] .article-detail h4{font-family:'Noto Serif Telugu',serif;font-size:21px}
-.article-detail .ar-text{font-size:15px;line-height:1.7;color:var(--ivory-2)}
-.article-detail .ar-text p{margin-bottom:14px}
-[data-lang="hi"] .article-detail .ar-text{font-family:'Noto Serif Devanagari',serif;font-size:14px}
-[data-lang="te"] .article-detail .ar-text{font-family:'Noto Serif Telugu',serif;font-size:13px}
-.ar-tag{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:rgba(201,122,43,.15);color:var(--saffron);padding:5px 12px;border-radius:999px;font-weight:600;margin-top:18px}
+.article-detail .ar-no{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.article-detail h4{font-family:'Fraunces',serif;font-size:clamp(21.8px, 1.458vw, 42.0px);color:var(--ivory);font-weight:500;letter-spacing:-.5px;margin-bottom:18px}
+[data-lang="hi"] .article-detail h4{font-family:'Noto Serif Devanagari',serif;font-size:clamp(17.2px, 1.146vw, 33.0px)}
+[data-lang="te"] .article-detail h4{font-family:'Noto Serif Telugu',serif;font-size:clamp(16.4px, 1.094vw, 31.5px)}
+.article-detail .ar-text{font-size:clamp(11.7px, 0.781vw, 22.5px);line-height:1.7;color:var(--ivory-2)}
+.article-detail .ar-text p{margin-bottom:clamp(10.5px, 0.729vw, 21.0px)}
+[data-lang="hi"] .article-detail .ar-text{font-family:'Noto Serif Devanagari',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
+[data-lang="te"] .article-detail .ar-text{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.1px, 0.677vw, 19.5px)}
+.ar-tag{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:rgba(201,122,43,.15);color:var(--saffron);padding:5px 12px;border-radius:999px;font-weight:600;margin-top:clamp(13.5px, 0.938vw, 27.0px)}
 
 /* FILM */
 .film-frame{background:#000;border-radius:14px;overflow:hidden;aspect-ratio:16/9;width:100%;display:grid;place-items:center;position:relative;background:radial-gradient(circle at center, rgba(201,122,43,.15), transparent 60%),linear-gradient(180deg, #14223a, #0a1422);border:1px solid var(--line)}
-.film-frame .play{width:96px;height:96px;border-radius:50%;background:linear-gradient(180deg, var(--saffron), var(--saffron-2));display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 40px var(--saffron-glow), inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s;border:none}
+.film-frame .play{width:clamp(64px, 5vw, 110px);height:clamp(64px, 5vw, 110px);border-radius:50%;background:linear-gradient(180deg, var(--saffron), var(--saffron-2));display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 40px var(--saffron-glow), inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s;border:none}
 .film-frame .play:hover{transform:scale(1.08)}
 .film-frame .play svg{width:36px;height:36px;color:#fff;margin-left:6px}
-.film-meta{margin-top:20px;text-align:center}
-.film-meta .label{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:8px}
-.film-meta .ttl{font-family:'Fraunces',serif;font-size:22px;color:var(--ivory);font-weight:500}
-.film-meta .duration{font-family:'Inter',sans-serif;font-size:12px;color:var(--ivory-2);opacity:.6;margin-top:6px;letter-spacing:1px}
+.film-meta{margin-top:clamp(15.0px, 1.042vw, 30.0px);text-align:center}
+.film-meta .label{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.film-meta .ttl{font-family:'Fraunces',serif;font-size:clamp(17.2px, 1.146vw, 33.0px);color:var(--ivory);font-weight:500}
+.film-meta .duration{font-family:'Inter',sans-serif;font-size:clamp(9.4px, 0.625vw, 18.0px);color:var(--ivory-2);opacity:.6;margin-top:6px;letter-spacing:1px}
 
 /* ============ WRITINGS ============ */
-#screen-writings{display:none;height:100%;grid-template-columns:380px 1fr;gap:0}
+#screen-writings{display:none;height:100%;grid-template-columns:clamp(260px, 22vw, 360px) 1fr;gap:0}
 #screen-writings.active{display:grid}
-.writings-left{padding:32px 36px 32px 80px;border-right:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
-.writings-left .gallery-num{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.writings-left{padding:clamp(24px, 2.6vw, 36px) clamp(20px, 2.2vw, 30px) clamp(20px, 2.2vw, 30px) clamp(36px, 4.5vw, 64px);border-right:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;gap:clamp(10px, 1vw, 14px)}
+.writings-left .gallery-num{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:0;display:flex;align-items:center;gap:14px}
 .writings-left .gallery-num::before{content:"";width:36px;height:1px;background:var(--gold)}
-.writings-left h2{font-family:'Fraunces',serif;font-size:42px;line-height:1.05;font-weight:400;letter-spacing:-1.2px;color:var(--ivory);margin-bottom:16px}
+.writings-left h2{font-family:'Fraunces',serif;font-size:clamp(24px, 2.4vw, 36px);line-height:1.05;font-weight:400;letter-spacing:-1.2px;color:var(--ivory);margin-bottom:0}
 .writings-left h2 em{color:var(--saffron);font-style:italic;font-weight:300}
-[data-lang="hi"] .writings-left h2{font-family:'Noto Serif Devanagari',serif;font-size:34px;letter-spacing:0}
-[data-lang="te"] .writings-left h2{font-family:'Noto Serif Telugu',serif;font-size:32px;letter-spacing:0}
-.writings-left .intro{font-size:14px;line-height:1.6;color:var(--ivory-2);opacity:.8;margin-bottom:20px}
-.writings-list{display:flex;flex-direction:column;gap:8px;overflow-y:auto;padding-right:8px}
+[data-lang="hi"] .writings-left h2{font-family:'Noto Serif Devanagari',serif;font-size:clamp(20px, 2vw, 30px);letter-spacing:0}
+[data-lang="te"] .writings-left h2{font-family:'Noto Serif Telugu',serif;font-size:clamp(20px, 2vw, 28px);letter-spacing:0}
+.writings-left .intro{font-size:clamp(12px, 1vw, 14px);line-height:1.5;color:var(--ivory-2);opacity:.8;margin-bottom:0}
+.writings-list{display:flex;flex-direction:column;gap:6px;overflow-y:auto;padding-right:6px;flex:1;min-height:0}
 .writings-list::-webkit-scrollbar{width:4px}
 .writings-list::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:2px}
-.writing-item{padding:14px 16px;border-radius:10px;cursor:pointer;border:1px solid var(--line);background:rgba(245,239,226,.03);transition:all .2s}
+.writing-item{padding:12px 14px;border-radius:10px;cursor:pointer;border:1px solid var(--line);background:rgba(245,239,226,.03);transition:all .2s;flex-shrink:0}
 .writing-item:hover{background:rgba(245,239,226,.06);border-color:rgba(201,122,43,.4)}
 .writing-item.active{background:rgba(201,122,43,.12);border-color:var(--saffron)}
-.writing-item .yr{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:4px}
-.writing-item .ttl{font-family:'Fraunces',serif;font-size:15px;color:var(--ivory);line-height:1.3;font-weight:500}
-[data-lang="hi"] .writing-item .ttl{font-family:'Noto Serif Devanagari',serif;font-size:14px}
-[data-lang="te"] .writing-item .ttl{font-family:'Noto Serif Telugu',serif;font-size:13px}
+.writing-item .yr{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:3px}
+.writing-item .ttl{font-family:'Fraunces',serif;font-size:clamp(13px, 1.05vw, 15px);color:var(--ivory);line-height:1.3;font-weight:500}
+[data-lang="hi"] .writing-item .ttl{font-family:'Noto Serif Devanagari',serif;font-size:clamp(12px, 1vw, 14px)}
+[data-lang="te"] .writing-item .ttl{font-family:'Noto Serif Telugu',serif;font-size:clamp(11px, 0.95vw, 13px)}
 
-.writings-right{padding:32px 80px 32px 48px;overflow:hidden;position:relative;display:flex;flex-direction:column}
-.book-display{display:grid;grid-template-columns:200px 1fr;gap:36px;margin-bottom:24px;flex-shrink:0}
+.writings-right{padding:clamp(24px, 2.6vw, 36px) clamp(32px, 4vw, 56px) clamp(20px, 2.2vw, 30px) clamp(24px, 2.8vw, 40px);overflow:hidden;position:relative;display:flex;flex-direction:column;gap:clamp(14px, 1.4vw, 20px)}
+.book-display{display:grid;grid-template-columns:clamp(140px, 12vw, 200px) 1fr;gap:clamp(20px, 2.4vw, 36px);flex-shrink:0;align-items:start}
 .book-cover{
-  width:200px;aspect-ratio:.72;
+  width:100%;aspect-ratio:.72;
   position:relative;border-radius:4px 10px 10px 4px;
-  padding:24px 18px 24px 30px;display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(16px, 1.8vw, 24px) clamp(14px, 1.4vw, 18px) clamp(16px, 1.8vw, 24px) clamp(22px, 2.4vw, 30px);
+  display:flex;flex-direction:column;justify-content:space-between;
   box-shadow:-5px 0 0 rgba(0,0,0,.3), 0 20px 40px rgba(0,0,0,.4);
   color:var(--ivory);
   font-family:'Fraunces',serif;
@@ -580,143 +609,558 @@ body{
 .book-cover.b4{background:linear-gradient(135deg, #3a1c2a, #1f0d18)}
 .book-cover.b5{background:linear-gradient(135deg, #1c2a3a, #0a1422)}
 .book-cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:repeating-linear-gradient(180deg, rgba(0,0,0,.3) 0 5px, rgba(0,0,0,.5) 5px 10px);border-radius:4px 0 0 4px}
-.book-cover .bc-label{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:2px;color:var(--gold-2);text-transform:uppercase;font-weight:600;margin-bottom:8px;opacity:.85}
-.book-cover .bc-title{font-size:18px;line-height:1.2;font-weight:500;letter-spacing:-.3px}
-.book-cover .bc-author{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-2);font-weight:500;border-top:1px solid rgba(168,131,65,.4);padding-top:8px;opacity:.8}
+.book-cover .bc-label{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:2px;color:var(--gold-2);text-transform:uppercase;font-weight:600;margin-bottom:6px;opacity:.85}
+.book-cover .bc-title{font-size:clamp(14px, 1.3vw, 17px);line-height:1.2;font-weight:500;letter-spacing:-.3px}
+.book-cover .bc-author{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-2);font-weight:500;border-top:1px solid rgba(168,131,65,.4);padding-top:6px;opacity:.8}
 
-.book-meta{flex:1;min-width:0}
-.book-meta .year-tag{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:rgba(201,122,43,.15);color:var(--saffron);padding:5px 12px;border-radius:999px;font-weight:600;margin-bottom:14px}
-.book-meta h3{font-family:'Fraunces',serif;font-size:34px;line-height:1.1;font-weight:500;letter-spacing:-.8px;color:var(--ivory);margin-bottom:8px}
-[data-lang="hi"] .book-meta h3{font-family:'Noto Serif Devanagari',serif;font-size:28px}
-[data-lang="te"] .book-meta h3{font-family:'Noto Serif Telugu',serif;font-size:26px}
-.book-meta .subtitle{font-family:'Fraunces',serif;font-size:15px;color:var(--ivory-2);opacity:.75;font-style:italic;margin-bottom:14px}
-.book-stats{display:flex;gap:24px;padding-top:14px;border-top:1px solid var(--line)}
+.book-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:clamp(8px, 0.8vw, 12px)}
+.book-meta .year-tag{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:rgba(201,122,43,.15);color:var(--saffron);padding:5px 12px;border-radius:999px;font-weight:600;align-self:flex-start;margin-bottom:0}
+.book-meta h3{font-family:'Fraunces',serif;font-size:clamp(22px, 2.2vw, 30px);line-height:1.1;font-weight:500;letter-spacing:-.8px;color:var(--ivory);margin-bottom:0}
+[data-lang="hi"] .book-meta h3{font-family:'Noto Serif Devanagari',serif;font-size:clamp(20px, 2vw, 26px)}
+[data-lang="te"] .book-meta h3{font-family:'Noto Serif Telugu',serif;font-size:clamp(18px, 1.8vw, 24px)}
+.book-meta .subtitle{font-family:'Fraunces',serif;font-size:clamp(12px, 1vw, 14px);color:var(--ivory-2);opacity:.75;font-style:italic;margin-bottom:0}
+.book-stats{display:flex;gap:clamp(18px, 2vw, 26px);padding-top:clamp(10px, 1vw, 14px);border-top:1px solid var(--line);margin-top:0}
 .book-stats .bs{display:flex;flex-direction:column}
-.book-stats .bs .n{font-family:'Fraunces',serif;font-size:22px;color:var(--saffron);font-weight:400;line-height:1}
+.book-stats .bs .n{font-family:'Fraunces',serif;font-size:clamp(16px, 1.5vw, 20px);color:var(--saffron);font-weight:400;line-height:1}
 .book-stats .bs .l{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:4px;font-weight:600}
 
 .book-excerpt{
   background:var(--paper);color:var(--ink);
-  padding:24px 32px;border-radius:8px;
+  padding:clamp(18px, 1.8vw, 26px) clamp(22px, 2.4vw, 32px);border-radius:8px;
   font-family:'Cormorant Garamond',serif;
   flex:1;overflow-y:auto;
-  position:relative;
+  position:relative;min-height:0;
   box-shadow:inset 0 0 0 1px rgba(14,26,43,.08);
   background-image:linear-gradient(180deg, rgba(14,26,43,.02), transparent),url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='1.2'/%3E%3CfeColorMatrix values='0 0 0 0 0.4, 0 0 0 0 0.3, 0 0 0 0 0.2, 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .book-excerpt::-webkit-scrollbar{width:6px}
 .book-excerpt::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:3px}
-.book-excerpt .ex-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.book-excerpt .ex-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;font-weight:700;margin-bottom:clamp(9.0px, 0.625vw, 18.0px);display:flex;align-items:center;gap:8px}
 .book-excerpt .ex-label::before, .book-excerpt .ex-label::after{content:"";height:1px;background:var(--saffron);opacity:.4;flex:1}
-.book-excerpt p{font-size:16px;line-height:1.65;color:var(--ink);margin-bottom:12px}
-.book-excerpt .opener{font-size:20px;font-style:italic;color:var(--ink-2);font-weight:500}
-.book-excerpt .signoff{margin-top:14px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--saffron);text-transform:uppercase;font-weight:600;text-align:right}
-[data-lang="hi"] .book-excerpt p{font-family:'Noto Serif Devanagari',serif;font-size:15px}
-[data-lang="te"] .book-excerpt p{font-family:'Noto Serif Telugu',serif;font-size:14px}
+.book-excerpt p{font-size:clamp(12.5px, 0.833vw, 24.0px);line-height:1.65;color:var(--ink);margin-bottom:12px}
+.book-excerpt .opener{font-size:clamp(15px, 1.3vw, 20px);font-style:italic;color:var(--ink-2);font-weight:500}
+.book-excerpt .signoff{margin-top:clamp(10.5px, 0.729vw, 21.0px);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--saffron);text-transform:uppercase;font-weight:600;text-align:right}
+[data-lang="hi"] .book-excerpt p{font-family:'Noto Serif Devanagari',serif;font-size:clamp(11.7px, 0.781vw, 22.5px)}
+[data-lang="te"] .book-excerpt p{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
 
 /* ============ LEGACY ============ */
-#screen-legacy{display:none;height:100%;flex-direction:column;padding:28px 64px 16px}
+#screen-legacy{display:none;height:100%;flex-direction:column;padding:clamp(24px, 2.8vw, 40px) clamp(32px, 4vw, 64px) clamp(16px, 1.8vw, 24px)}
 #screen-legacy.active{display:flex}
 
-.legacy-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;flex-shrink:0}
-.legacy-head .left .eyebrow{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+.legacy-head{display:flex;flex-direction:column;gap:clamp(12px, 1.2vw, 18px);margin-bottom:clamp(14px, 1.4vw, 20px);flex-shrink:0}
+.legacy-head .left{display:flex;flex-direction:column;gap:6px}
+.legacy-head .left .eyebrow{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
 .legacy-head .left .eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
-.legacy-head .left h2{font-family:'Fraunces',serif;font-size:44px;font-weight:400;letter-spacing:-1.2px;color:var(--ivory);margin-top:8px;line-height:1}
+.legacy-head .left h2{font-family:'Fraunces',serif;font-size:clamp(28px, 2.6vw, 44px);font-weight:400;letter-spacing:-1.2px;color:var(--ivory);line-height:1}
 .legacy-head .left h2 em{color:var(--saffron);font-style:italic;font-weight:300}
-[data-lang="hi"] .legacy-head .left h2{font-family:'Noto Serif Devanagari',serif;font-size:36px;letter-spacing:0}
-[data-lang="te"] .legacy-head .left h2{font-family:'Noto Serif Telugu',serif;font-size:34px;letter-spacing:0}
+[data-lang="hi"] .legacy-head .left h2{font-family:'Noto Serif Devanagari',serif;font-size:clamp(28.1px, 1.875vw, 54.0px);letter-spacing:0}
+[data-lang="te"] .legacy-head .left h2{font-family:'Noto Serif Telugu',serif;font-size:clamp(22px, 2vw, 34px);letter-spacing:0}
 
 /* Legacy tabs */
-.legacy-tabs{display:flex;gap:6px;background:rgba(245,239,226,.04);border-radius:14px;padding:5px;border:1px solid var(--line)}
-.legacy-tab{padding:10px 18px;border:none;background:transparent;color:var(--ivory-2);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s}
+.legacy-tabs{display:flex;gap:4px;background:rgba(245,239,226,.04);border-radius:14px;padding:5px;border:1px solid var(--line);align-self:flex-start;flex-wrap:wrap}
+.legacy-tab{padding:clamp(8px, 0.9vw, 11px) clamp(12px, 1.4vw, 18px);border:none;background:transparent;color:var(--ivory-2);font-family:'Inter',sans-serif;font-size:clamp(10px, 0.85vw, 11px);letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .legacy-tab:hover{background:rgba(245,239,226,.06);color:var(--ivory)}
 .legacy-tab.active{background:var(--saffron);color:#fff;box-shadow:0 4px 12px var(--saffron-glow)}
 
-.legacy-content{flex:1;overflow:hidden;position:relative}
-.legacy-panel{position:absolute;inset:0;display:none;animation:fadeIn .4s ease}
-.legacy-panel.active{display:block}
+.legacy-content{flex:1;overflow:hidden;position:relative;min-height:0}
+.legacy-panel{position:absolute;inset:0;display:none;animation:fadeIn .4s ease;overflow:hidden}
+.legacy-panel.active{display:flex;flex-direction:column}
 
 /* Conversion panel */
-.conv-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;height:100%}
+.conv-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(20px, 2.2vw, 32px);flex:1;min-height:0}
 .conv-left{padding:0;display:flex;flex-direction:column;justify-content:center}
-.conv-left .big-stat{display:flex;align-items:baseline;gap:16px;margin-bottom:24px}
-.conv-left .big-stat .num{font-family:'Fraunces',serif;font-size:120px;font-weight:300;color:var(--saffron);letter-spacing:-4px;line-height:1}
-.conv-left .big-stat .desc{font-family:'Fraunces',serif;font-size:18px;color:var(--ivory);font-style:italic;max-width:280px;line-height:1.3}
-.conv-left .body{font-size:15px;line-height:1.7;color:var(--ivory-2);max-width:600px;margin-bottom:20px}
-[data-lang="hi"] .conv-left .body{font-family:'Noto Serif Devanagari',serif;font-size:14px}
-[data-lang="te"] .conv-left .body{font-family:'Noto Serif Telugu',serif;font-size:13px}
-.conv-vows{padding:20px 24px;background:linear-gradient(135deg, rgba(201,122,43,.10), rgba(201,122,43,.02));border-left:3px solid var(--saffron);border-radius:0 12px 12px 0;max-width:600px}
-.conv-vows .ttl{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;font-weight:600;margin-bottom:10px}
-.conv-vows p{font-family:'Fraunces',serif;font-size:14px;line-height:1.6;color:var(--ivory-2);font-style:italic}
+.conv-left .big-stat{display:flex;align-items:baseline;gap:14px;margin-bottom:clamp(14px, 1.4vw, 20px);flex-wrap:wrap}
+.conv-left .big-stat .num{font-family:'Fraunces',serif;font-size:clamp(56px, 6vw, 96px);font-weight:300;color:var(--saffron);letter-spacing:-3px;line-height:1}
+.conv-left .big-stat .desc{font-family:'Fraunces',serif;font-size:clamp(14px, 1.2vw, 17px);color:var(--ivory);font-style:italic;max-width:280px;line-height:1.3}
+.conv-left .body{font-size:clamp(12px, 1vw, 14px);line-height:1.55;color:var(--ivory-2);max-width:600px;margin-bottom:clamp(12px, 1.2vw, 18px)}
+[data-lang="hi"] .conv-left .body{font-family:'Noto Serif Devanagari',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
+[data-lang="te"] .conv-left .body{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.1px, 0.677vw, 19.5px)}
+.conv-vows{padding:clamp(14px, 1.4vw, 18px) clamp(18px, 2vw, 24px);background:linear-gradient(135deg, rgba(201,122,43,.10), rgba(201,122,43,.02));border-left:3px solid var(--saffron);border-radius:0 12px 12px 0;max-width:600px}
+.conv-vows .ttl{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;font-weight:600;margin-bottom:clamp(7.5px, 0.521vw, 15.0px)}
+.conv-vows p{font-family:'Fraunces',serif;font-size:clamp(12px, 1vw, 14px);line-height:1.55;color:var(--ivory-2);font-style:italic}
 
-.conv-right{padding:0;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 60% 40%, rgba(201,122,43,.08), transparent 70%);border-radius:16px;border:1px solid var(--line);padding:32px}
-.dharma-wheel{width:240px;height:240px;margin:0 auto 18px;position:relative}
+.conv-right{display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(circle at 60% 40%, rgba(201,122,43,.08), transparent 70%);border-radius:16px;border:1px solid var(--line);padding:clamp(20px, 2.4vw, 32px)}
+.dharma-wheel{width:clamp(160px, 16vw, 220px);height:clamp(160px, 16vw, 220px);margin:0 auto clamp(12px, 1.4vw, 18px);position:relative}
 .dharma-wheel svg{width:100%;height:100%;color:var(--saffron);animation:spin 90s linear infinite}
-.conv-right h4{font-family:'Fraunces',serif;font-size:20px;color:var(--ivory);font-weight:500;text-align:center;margin-bottom:8px}
+.conv-right h4{font-family:'Fraunces',serif;font-size:clamp(16px, 1.4vw, 19px);color:var(--ivory);font-weight:500;text-align:center;margin-bottom:6px}
 .conv-right p{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--gold);text-align:center;text-transform:uppercase;font-weight:500}
 
 /* Reservations panel */
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;height:100%}
-.res-card{padding:28px 32px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column}
-.res-card h4{font-family:'Fraunces',serif;font-size:22px;color:var(--saffron);font-weight:500;letter-spacing:-.3px;margin-bottom:8px}
-.res-card .subt{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:18px}
-.res-card .stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px, 1.8vw, 24px);flex:1;min-height:0}
+.res-card{padding:clamp(20px, 2.2vw, 28px) clamp(22px, 2.4vw, 32px);background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column}
+.res-card h4{font-family:'Fraunces',serif;font-size:clamp(17px, 1.5vw, 21px);color:var(--saffron);font-weight:500;letter-spacing:-.3px;margin-bottom:6px}
+.res-card .subt{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:clamp(12px, 1.2vw, 16px)}
+.res-card .stat-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:clamp(10px, 1vw, 14px);padding-bottom:clamp(10px, 1vw, 14px);border-bottom:1px solid var(--line)}
 .res-card .stat-row:last-of-type{border-bottom:none}
-.res-card .stat-row .lbl{font-family:'Inter',sans-serif;font-size:12px;color:var(--ivory-2);opacity:.85;max-width:280px}
-.res-card .stat-row .val{font-family:'Fraunces',serif;font-size:24px;color:var(--saffron);font-weight:400;letter-spacing:-.5px}
-.res-card p{font-size:13px;line-height:1.6;color:var(--ivory-2);opacity:.82;margin-top:auto}
-[data-lang="hi"] .res-card p{font-family:'Noto Serif Devanagari',serif;font-size:12px}
-[data-lang="te"] .res-card p{font-family:'Noto Serif Telugu',serif;font-size:11px}
+.res-card .stat-row .lbl{font-family:'Inter',sans-serif;font-size:clamp(11px, 0.95vw, 12px);color:var(--ivory-2);opacity:.85;line-height:1.3}
+.res-card .stat-row .val{font-family:'Fraunces',serif;font-size:clamp(18px, 1.7vw, 22px);color:var(--saffron);font-weight:400;letter-spacing:-.5px;flex-shrink:0}
+.res-card p{font-size:clamp(11px, 0.95vw, 13px);line-height:1.5;color:var(--ivory-2);opacity:.82;margin-top:auto;padding-top:14px}
+[data-lang="hi"] .res-card p{font-family:'Noto Serif Devanagari',serif;font-size:clamp(9.4px, 0.625vw, 18.0px)}
+[data-lang="te"] .res-card p{font-family:'Noto Serif Telugu',serif;font-size:clamp(8.6px, 0.573vw, 16.5px)}
 
 /* Honours panel */
-.hon-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;align-content:start}
-.hon-card{padding:24px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;text-align:center;transition:all .2s;cursor:default}
+.hon-grid{display:grid;grid-template-columns:repeat(3, 1fr);grid-auto-rows:1fr;gap:clamp(14px, 1.4vw, 20px);flex:1;align-content:stretch}
+.hon-card{padding:clamp(16px, 1.8vw, 22px);background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;text-align:center;transition:all .2s;cursor:default;display:flex;flex-direction:column;justify-content:flex-start;align-items:center}
 .hon-card:hover{border-color:var(--saffron);transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,.3)}
-.hon-card .medal{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg, var(--gold-2), var(--gold));margin:0 auto 14px;display:grid;place-items:center;box-shadow:0 6px 16px rgba(168,131,65,.3), inset 0 -2px 4px rgba(0,0,0,.2)}
-.hon-card .medal svg{width:30px;height:30px;color:#3a1808}
-.hon-card .year{font-family:'Fraunces',serif;font-size:28px;color:var(--saffron);font-weight:400;letter-spacing:-1px;line-height:1}
-.hon-card .ttl{font-family:'Fraunces',serif;font-size:15px;color:var(--ivory);font-weight:500;margin-top:8px;margin-bottom:8px;line-height:1.3}
-[data-lang="hi"] .hon-card .ttl{font-family:'Noto Serif Devanagari',serif;font-size:14px}
-[data-lang="te"] .hon-card .ttl{font-family:'Noto Serif Telugu',serif;font-size:13px}
-.hon-card .desc{font-size:11px;line-height:1.5;color:var(--ivory-2);opacity:.75}
+.hon-card .medal{width:clamp(44px, 4vw, 56px);height:clamp(44px, 4vw, 56px);border-radius:50%;background:linear-gradient(135deg, var(--gold-2), var(--gold));margin:0 0 12px;display:grid;place-items:center;box-shadow:0 6px 16px rgba(168,131,65,.3), inset 0 -2px 4px rgba(0,0,0,.2);flex-shrink:0}
+.hon-card .medal svg{width:clamp(20px, 1.8vw, 26px);height:clamp(20px, 1.8vw, 26px);color:#3a1808}
+.hon-card .year{font-family:'Fraunces',serif;font-size:clamp(20px, 1.9vw, 26px);color:var(--saffron);font-weight:400;letter-spacing:-1px;line-height:1}
+.hon-card .ttl{font-family:'Fraunces',serif;font-size:clamp(13px, 1.1vw, 15px);color:var(--ivory);font-weight:500;margin-top:6px;margin-bottom:6px;line-height:1.3}
+[data-lang="hi"] .hon-card .ttl{font-family:'Noto Serif Devanagari',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
+[data-lang="te"] .hon-card .ttl{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.1px, 0.677vw, 19.5px)}
+.hon-card .desc{font-size:clamp(10px, 0.9vw, 11px);line-height:1.45;color:var(--ivory-2);opacity:.75}
 
 /* Quote wall */
-.qwall{display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;align-content:start}
-.qwall .qcell{padding:24px 26px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;position:relative;transition:all .25s;cursor:default}
+.qwall{display:grid;grid-template-columns:repeat(3, 1fr);grid-auto-rows:1fr;gap:clamp(12px, 1.2vw, 16px);flex:1;align-content:stretch}
+.qwall .qcell{padding:clamp(18px, 1.8vw, 24px) clamp(20px, 2vw, 26px);background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;position:relative;transition:all .25s;cursor:default;display:flex;flex-direction:column;overflow:hidden}
 .qwall .qcell:hover{background:rgba(201,122,43,.08);border-color:var(--saffron);transform:translateY(-3px)}
-.qwall .qcell::before{content:'"';position:absolute;top:8px;left:14px;font-family:'Fraunces',serif;font-size:60px;color:var(--saffron);opacity:.25;line-height:1}
-.qwall .qcell .q{font-family:'Fraunces',serif;font-size:14px;line-height:1.55;color:var(--ivory);font-style:italic;font-weight:400;margin-top:18px;margin-bottom:14px}
-[data-lang="hi"] .qwall .qcell .q{font-family:'Noto Serif Devanagari',serif;font-style:normal;font-size:13px}
-[data-lang="te"] .qwall .qcell .q{font-family:'Noto Serif Telugu',serif;font-style:normal;font-size:12px}
+.qwall .qcell::before{content:'"';position:absolute;top:6px;left:12px;font-family:'Fraunces',serif;font-size:clamp(40px, 4vw, 56px);color:var(--saffron);opacity:.25;line-height:1}
+.qwall .qcell .q{font-family:'Fraunces',serif;font-size:clamp(12px, 1vw, 14px);line-height:1.5;color:var(--ivory);font-style:italic;font-weight:400;margin-top:clamp(14px, 1.4vw, 18px);margin-bottom:12px;flex:1;overflow:hidden}
+[data-lang="hi"] .qwall .qcell .q{font-family:'Noto Serif Devanagari',serif;font-style:normal;font-size:clamp(10.1px, 0.677vw, 19.5px)}
+[data-lang="te"] .qwall .qcell .q{font-family:'Noto Serif Telugu',serif;font-style:normal;font-size:clamp(9.4px, 0.625vw, 18.0px)}
 .qwall .qcell .src{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:600}
 
 /* Visitor reflections wall */
-.reflections{display:grid;grid-template-columns:repeat(4, 1fr);gap:14px;align-content:start}
-.reflection{padding:20px 22px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:12px;transform:rotate(0deg);transition:all .25s}
+/* Visitor reflections wall */
+.refl-wrap{display:flex;flex-direction:column;flex:1;min-height:0;gap:clamp(10px, 1vw, 14px)}
+.reflections{display:grid;grid-template-columns:repeat(4, 1fr);grid-auto-rows:1fr;gap:clamp(10px, 1vw, 14px);flex:1;min-height:0}
+.reflection{padding:clamp(14px, 1.4vw, 18px) clamp(16px, 1.6vw, 22px);background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:12px;transform:rotate(0deg);transition:all .25s;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
 .reflection:nth-child(odd){transform:rotate(-1deg)}
 .reflection:nth-child(even){transform:rotate(1deg)}
 .reflection:hover{background:rgba(201,122,43,.08);border-color:var(--saffron);transform:rotate(0deg) translateY(-3px)}
-.reflection .text{font-family:'Fraunces',serif;font-size:14px;line-height:1.5;color:var(--ivory-2);font-style:italic;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
-.reflection .meta{display:flex;justify-content:space-between;align-items:baseline;padding-top:10px;border-top:1px solid var(--line);font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:600}
+.reflection .text{font-family:'Fraunces',serif;font-size:clamp(12px, 1vw, 14px);line-height:1.55;color:var(--ivory-2);font-style:italic;margin-bottom:12px;flex:1;overflow:hidden}
+.reflection .meta{display:flex;justify-content:space-between;align-items:baseline;padding-top:8px;border-top:1px solid var(--line);font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:600;flex-shrink:0}
 .reflection .meta .name{color:var(--saffron)}
 .reflection .meta .date{opacity:.7}
-.reflection-cta{margin-top:18px;padding:16px;background:linear-gradient(135deg, rgba(201,122,43,.10), rgba(201,122,43,.02));border:1px dashed var(--saffron);border-radius:12px;text-align:center;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--saffron);text-transform:uppercase;font-weight:600;cursor:pointer;grid-column:1/-1}
+.reflection-cta{padding:14px;background:linear-gradient(135deg, rgba(201,122,43,.10), rgba(201,122,43,.02));border:1px dashed var(--saffron);border-radius:12px;text-align:center;font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2px;color:var(--saffron);text-transform:uppercase;font-weight:600;cursor:pointer;flex-shrink:0}
 
 /* Influence map */
-.inf-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;align-content:start}
-.inf-card{padding:22px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;transition:all .25s;cursor:default}
+.inf-grid{display:grid;grid-template-columns:repeat(4, 1fr);grid-auto-rows:1fr;gap:clamp(12px, 1.2vw, 16px);flex:1;align-content:stretch}
+.inf-card{padding:clamp(16px, 1.6vw, 20px);background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;transition:all .25s;cursor:default;display:flex;flex-direction:column;overflow:hidden}
 .inf-card:hover{border-color:var(--saffron);background:rgba(201,122,43,.06)}
-.inf-card .icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg, rgba(201,122,43,.25), rgba(201,122,43,.08));border:1px solid rgba(201,122,43,.4);display:grid;place-items:center;color:var(--saffron);margin-bottom:14px}
-.inf-card .icon svg{width:22px;height:22px}
-.inf-card h5{font-family:'Fraunces',serif;font-size:17px;color:var(--ivory);font-weight:500;letter-spacing:-.2px;margin-bottom:6px;line-height:1.2}
-[data-lang="hi"] .inf-card h5{font-family:'Noto Serif Devanagari',serif;font-size:15px}
-[data-lang="te"] .inf-card h5{font-family:'Noto Serif Telugu',serif;font-size:14px}
-.inf-card p{font-size:12px;line-height:1.55;color:var(--ivory-2);opacity:.8}
-[data-lang="hi"] .inf-card p{font-family:'Noto Serif Devanagari',serif;font-size:11px}
-[data-lang="te"] .inf-card p{font-family:'Noto Serif Telugu',serif;font-size:11px}
+.inf-card .icon{width:clamp(36px, 3.4vw, 42px);height:clamp(36px, 3.4vw, 42px);border-radius:12px;background:linear-gradient(135deg, rgba(201,122,43,.25), rgba(201,122,43,.08));border:1px solid rgba(201,122,43,.4);display:grid;place-items:center;color:var(--saffron);margin-bottom:12px;flex-shrink:0}
+.inf-card .icon svg{width:clamp(18px, 1.6vw, 22px);height:clamp(18px, 1.6vw, 22px)}
+.inf-card h5{font-family:'Fraunces',serif;font-size:clamp(14px, 1.3vw, 17px);color:var(--ivory);font-weight:500;letter-spacing:-.2px;margin-bottom:5px;line-height:1.2}
+[data-lang="hi"] .inf-card h5{font-family:'Noto Serif Devanagari',serif;font-size:clamp(11.7px, 0.781vw, 22.5px)}
+[data-lang="te"] .inf-card h5{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
+.inf-card p{font-size:clamp(11px, 0.95vw, 12px);line-height:1.5;color:var(--ivory-2);opacity:.8;overflow:hidden}
+[data-lang="hi"] .inf-card p{font-family:'Noto Serif Devanagari',serif;font-size:clamp(8.6px, 0.573vw, 16.5px)}
+[data-lang="te"] .inf-card p{font-family:'Noto Serif Telugu',serif;font-size:clamp(8.6px, 0.573vw, 16.5px)}
 
-/* Lang */
+/* ============ DEEP-DIVE SUBSCREENS (PDF-named demos) ============ */
+.subscreen{
+  position:absolute;top:var(--header-h);left:0;right:0;bottom:var(--footer-h);z-index:55;
+  background:linear-gradient(180deg, #0e1a2b 0%, #0a1422 100%);
+  display:none;flex-direction:column;
+  animation:fadeIn .4s ease;
+}
+.subscreen.show{display:flex}
+.subscreen::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.96, 0 0 0 0 0.94, 0 0 0 0 0.88, 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.25;mix-blend-mode:overlay;
+}
+.subscreen-head{padding:clamp(16px, 1.8vw, 24px) clamp(32px, 4vw, 56px) clamp(12px, 1.4vw, 18px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-bottom:1px solid var(--line);position:relative;z-index:2;flex-shrink:0}
+.subscreen-head .left{display:flex;flex-direction:column;gap:8px}
+.subscreen-head .crumb{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px}
+.subscreen-head .crumb .sep{opacity:.4}
+.subscreen-head h2{font-family:'Fraunces',serif;font-size:clamp(24px, 2.1vw, 36px);font-weight:400;letter-spacing:-1px;color:var(--ivory);line-height:1.05}
+.subscreen-head h2 em{color:var(--saffron);font-style:italic;font-weight:300}
+.subscreen-head .right{display:flex;align-items:center;gap:12px}
+.sub-close{width:clamp(36px, 2.4vw, 52px);height:clamp(36px, 2.4vw, 52px);border-radius:50%;background:rgba(245,239,226,.08);border:1px solid var(--line-strong);color:var(--ivory);cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.sub-close:hover{background:var(--saffron);border-color:var(--saffron);transform:rotate(90deg)}
+.sub-close svg{width:20px;height:20px}
+.subscreen-body{flex:1;overflow:hidden;position:relative;z-index:2}
+
+/* === ENTRANCE (G1) === */
+.entrance-grid{display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0}
+.ent-left{padding:32px 36px 32px 56px;display:flex;flex-direction:column;overflow:hidden}
+.ent-left .museum-vision{padding:22px 26px;background:linear-gradient(135deg, rgba(201,122,43,.10), rgba(201,122,43,.02));border-left:3px solid var(--saffron);border-radius:0 12px 12px 0;margin-bottom:clamp(15.0px, 1.042vw, 30.0px)}
+.ent-left .museum-vision .lbl{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--saffron);text-transform:uppercase;font-weight:600;margin-bottom:clamp(6.0px, 0.417vw, 12.0px)}
+.ent-left .museum-vision p{font-family:'Fraunces',serif;font-size:clamp(12.5px, 0.833vw, 24.0px);line-height:1.5;color:var(--ivory-2);font-style:italic}
+.ent-stats-row{display:grid;grid-template-columns:repeat(4, 1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:clamp(15.0px, 1.042vw, 30.0px)}
+.ent-stat{padding:0 14px;border-right:1px solid var(--line)}
+.ent-stat:last-child{border-right:none}
+.ent-stat .n{font-family:'Fraunces',serif;font-size:clamp(20.3px, 1.354vw, 39.0px);color:var(--saffron);font-weight:400;letter-spacing:-.5px;line-height:1}
+.ent-stat .l{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ivory-2);opacity:.7;margin-top:6px}
+.ent-section{margin-bottom:clamp(15.0px, 1.042vw, 30.0px)}
+.ent-section h4{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:clamp(7.5px, 0.521vw, 15.0px)}
+.ent-section p{font-size:clamp(10.9px, 0.729vw, 21.0px);line-height:1.65;color:var(--ivory-2);opacity:.85;max-width:560px}
+.ent-section .donor-row{display:grid;grid-template-columns:repeat(3, 1fr);gap:10px;margin-top:clamp(6.0px, 0.417vw, 12.0px)}
+.ent-section .donor-row .d{padding:10px 12px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:8px;text-align:center}
+.ent-section .donor-row .d .ttl{font-family:'Fraunces',serif;font-size:clamp(9.4px, 0.625vw, 18.0px);color:var(--ivory);font-weight:500;line-height:1.2}
+.ent-section .donor-row .d .role{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-top:4px}
+
+.ent-right{padding:32px 56px 32px 36px;display:flex;flex-direction:column;background:radial-gradient(circle at 60% 40%, rgba(201,122,43,.08), transparent 70%);overflow:hidden}
+.ent-right h4{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:clamp(10.5px, 0.729vw, 21.0px)}
+.gallery-map-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:12px;flex:1;align-content:start}
+.gm-card{padding:18px 20px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:6px}
+.gm-card:hover{background:rgba(201,122,43,.10);border-color:var(--saffron);transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.gm-card .gm-num{font-family:'Fraunces',serif;font-size:clamp(23.4px, 1.562vw, 45.0px);color:var(--saffron);font-weight:400;letter-spacing:-1px;line-height:1}
+.gm-card .gm-ttl{font-family:'Fraunces',serif;font-size:clamp(11.7px, 0.781vw, 22.5px);color:var(--ivory);font-weight:500;line-height:1.2}
+.gm-card .gm-sub{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:500;opacity:.7}
+
+/* === CONSTITUTION READER (G4 BOQ #9) === */
+.reader-grid{display:grid;grid-template-columns:clamp(200px, 18vw, 260px) 1fr clamp(220px, 20vw, 300px);height:100%;gap:0}
+.reader-toc{padding:24px 16px 24px 28px;border-right:1px solid var(--line);overflow-y:auto;background:rgba(14,26,43,.4)}
+.reader-toc::-webkit-scrollbar{width:4px}.reader-toc::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:2px}
+.reader-toc h4{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:clamp(10.5px, 0.729vw, 21.0px)}
+.reader-toc .toc-search{width:100%;padding:8px 12px;background:rgba(245,239,226,.06);border:1px solid var(--line);border-radius:8px;color:var(--ivory);font-family:'Inter',sans-serif;font-size:clamp(9.4px, 0.625vw, 18.0px);outline:none;margin-bottom:14px}
+.reader-toc .toc-search:focus{border-color:var(--saffron)}
+.toc-list{display:flex;flex-direction:column;gap:3px}
+.toc-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);color:var(--ivory-2);transition:all .2s;display:flex;justify-content:space-between;align-items:center}
+.toc-item:hover{background:rgba(245,239,226,.05)}
+.toc-item.active{background:rgba(201,122,43,.18);color:#fff;font-weight:600}
+.toc-item .n{font-family:'Fraunces',serif;color:var(--saffron);font-size:clamp(10.1px, 0.677vw, 19.5px);font-weight:500;letter-spacing:-.3px}
+.toc-section{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin:14px 8px 6px;font-weight:600;opacity:.6}
+
+.reader-main{padding:24px 56px;overflow-y:auto;background:linear-gradient(180deg, rgba(245,239,226,.02), transparent 50%)}
+.reader-main::-webkit-scrollbar{width:6px}.reader-main::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:3px}
+.reader-article-no{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.reader-article-title{font-family:'Fraunces',serif;font-size:clamp(28.1px, 1.875vw, 54.0px);font-weight:500;letter-spacing:-1px;color:var(--ivory);margin-bottom:6px;line-height:1.1}
+[data-lang="hi"] .reader-article-title{font-family:'Noto Serif Devanagari',serif;font-size:clamp(23.4px, 1.562vw, 45.0px)}
+[data-lang="te"] .reader-article-title{font-family:'Noto Serif Telugu',serif;font-size:clamp(21.8px, 1.458vw, 42.0px)}
+.reader-article-sub{font-family:'Fraunces',serif;font-size:clamp(10.9px, 0.729vw, 21.0px);color:var(--ivory-2);opacity:.7;font-style:italic;margin-bottom:24px}
+.reader-clause{padding:18px 24px;background:var(--paper);color:var(--ink);border-radius:8px;margin-bottom:14px;font-family:'Cormorant Garamond',serif;font-size:clamp(12.5px, 0.833vw, 24.0px);line-height:1.65;position:relative;box-shadow:inset 0 0 0 1px rgba(14,26,43,.08)}
+[data-lang="hi"] .reader-clause{font-family:'Noto Serif Devanagari',serif;font-size:clamp(11.7px, 0.781vw, 22.5px)}
+[data-lang="te"] .reader-clause{font-family:'Noto Serif Telugu',serif;font-size:clamp(10.9px, 0.729vw, 21.0px)}
+.reader-clause .cnum{position:absolute;top:14px;right:18px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--saffron);font-weight:700;text-transform:uppercase}
+.reader-clause strong{color:var(--saffron);font-weight:700}
+.reader-annotation{margin-top:clamp(12.0px, 0.833vw, 24.0px);padding:16px 22px;background:linear-gradient(135deg, rgba(201,122,43,.10), rgba(201,122,43,.02));border-left:3px solid var(--saffron);border-radius:0 10px 10px 0}
+.reader-annotation .lbl{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2.5px;color:var(--saffron);text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.reader-annotation p{font-size:clamp(10.1px, 0.677vw, 19.5px);line-height:1.6;color:var(--ivory-2);opacity:.9;font-style:italic;font-family:'Fraunces',serif}
+
+.reader-context{padding:24px 28px;border-left:1px solid var(--line);overflow-y:auto;background:rgba(14,26,43,.4)}
+.reader-context::-webkit-scrollbar{width:4px}.reader-context::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:2px}
+.reader-context h4{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:clamp(10.5px, 0.729vw, 21.0px);display:flex;align-items:center;gap:8px}
+.reader-context h4::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--saffron)}
+.audio-player{padding:14px 16px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:10px;margin-bottom:clamp(10.5px, 0.729vw, 21.0px);display:flex;align-items:center;gap:12px}
+.audio-player .play{width:36px;height:36px;border-radius:50%;background:var(--saffron);border:none;cursor:pointer;display:grid;place-items:center;color:#fff;flex-shrink:0}
+.audio-player .play svg{width:14px;height:14px;margin-left:2px}
+.audio-player .info{flex:1;min-width:0}
+.audio-player .info .t{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);color:var(--ivory);font-weight:600;letter-spacing:.5px}
+.audio-player .info .d{font-family:'Inter',sans-serif;font-size:9px;color:var(--ivory-2);opacity:.6;letter-spacing:1px;margin-top:2px}
+.context-card{padding:14px 16px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:10px;margin-bottom:clamp(7.5px, 0.521vw, 15.0px)}
+.context-card .ttl{font-family:'Fraunces',serif;font-size:clamp(10.9px, 0.729vw, 21.0px);color:var(--ivory);font-weight:500;margin-bottom:6px;letter-spacing:-.2px}
+.context-card p{font-size:clamp(9.0px, 0.599vw, 17.2px);line-height:1.55;color:var(--ivory-2);opacity:.8}
+
+/* === ANNIHILATION OF CASTE FLIPBOOK (G3 BOQ #12) === */
+.flipbook-stage{display:flex;flex-direction:column;height:100%;position:relative;padding:clamp(20px, 2.4vw, 36px) clamp(28px, 3.4vw, 56px) clamp(80px, 9vh, 110px);align-items:center;justify-content:center;background:radial-gradient(ellipse at center, rgba(201,122,43,.06), transparent 70%);overflow:hidden}
+.flipbook{
+  width:min(760px, 92%);
+  aspect-ratio: 760 / 520;
+  max-height:78%;
+  position:relative;
+  display:grid;grid-template-columns:1fr 1fr;
+  background:#0a1422;border-radius:4px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(245,239,226,.06);
+  transform-style:preserve-3d;
+}
+.flip-page{
+  position:relative;
+  background:var(--paper);color:var(--ink);
+  padding:clamp(22px, 2.8vw, 38px) clamp(26px, 3.4vw, 46px);overflow:hidden;
+  font-family:'Cormorant Garamond',serif;
+  background-image:linear-gradient(180deg, rgba(14,26,43,.02), transparent),url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='1.2'/%3E%3CfeColorMatrix values='0 0 0 0 0.4, 0 0 0 0 0.3, 0 0 0 0 0.2, 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  display:flex;flex-direction:column;
+}
+.flip-page.left{box-shadow:inset -16px 0 24px -10px rgba(0,0,0,.3);border-radius:4px 0 0 4px}
+.flip-page.right{box-shadow:inset 16px 0 24px -10px rgba(0,0,0,.3);border-radius:0 4px 4px 0}
+.flip-page .page-num{position:absolute;bottom:14px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--saffron);font-weight:600}
+.flip-page.left .page-num{left:clamp(26px, 3.4vw, 46px)}
+.flip-page.right .page-num{right:clamp(26px, 3.4vw, 46px)}
+.flip-page h3{font-family:'Fraunces',serif;font-size:clamp(18px, 1.7vw, 22px);font-weight:500;color:var(--ink);letter-spacing:-.5px;margin-bottom:clamp(10px, 1.2vw, 14px);line-height:1.2}
+.flip-page h3 em{color:var(--saffron);font-style:italic;font-weight:400}
+.flip-page p{font-size:clamp(11.5px, 1.1vw, 14px);line-height:1.55;color:var(--ink-2);margin-bottom:9px;text-align:justify}
+.flip-page p.opener{font-size:clamp(13px, 1.2vw, 16px);font-style:italic;color:var(--ink);margin-bottom:12px;font-weight:500}
+.flip-page .footnote{font-family:'Inter',sans-serif;font-size:9.5px;letter-spacing:1.5px;color:var(--saffron);font-weight:600;text-transform:uppercase;border-top:1px solid rgba(14,26,43,.12);padding-top:8px;margin-top:auto}
+
+.flipbook-controls{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:14px;
+  background:rgba(14,26,43,.85);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:999px;
+  padding:8px 8px 8px 18px;z-index:5;
+}
+.flipbook-controls .nav{width:clamp(32px, 2.2vw, 48px);height:clamp(32px, 2.2vw, 48px);border-radius:50%;background:var(--saffron);border:none;cursor:pointer;display:grid;place-items:center;color:#fff;transition:all .2s}
+.flipbook-controls .nav:hover{background:var(--saffron-2);transform:scale(1.08)}
+.flipbook-controls .nav:disabled{background:rgba(245,239,226,.1);cursor:not-allowed;color:rgba(245,239,226,.4)}
+.flipbook-controls .nav svg{width:18px;height:18px}
+.flipbook-controls .progress{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2px;color:var(--gold);font-weight:600;min-width:80px;text-align:center}
+.flipbook-controls .zoom, .flipbook-controls .bm{width:36px;height:36px;border-radius:50%;background:rgba(245,239,226,.06);border:1px solid var(--line);cursor:pointer;display:grid;place-items:center;color:var(--ivory);transition:all .2s}
+.flipbook-controls .zoom:hover, .flipbook-controls .bm:hover{background:var(--saffron);border-color:var(--saffron)}
+.flipbook-controls .zoom svg, .flipbook-controls .bm svg{width:14px;height:14px}
+
+.flipbook-meta{position:absolute;top:32px;left:56px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;font-weight:600}
+.flipbook-meta .ttl{font-family:'Fraunces',serif;font-size:clamp(10.9px, 0.729vw, 21.0px);color:var(--ivory);letter-spacing:-.2px;text-transform:none;margin-top:4px;font-weight:500;font-style:italic}
+
+/* ==================================================================
+   CLEAN LAYOUT OVERRIDE LAYER — forces consistent fit at any viewport
+   from 1440×900 MacBook fullscreen up to 3840×2160 4K BenQ
+   Page never scrolls. Content panels scroll internally if needed.
+   ================================================================== */
+
+/* Lang switching */
 [lang-block]{display:none}
+
+/* SINGLE SOURCE OF TRUTH for header/footer heights — used everywhere */
+:root{
+  --header-h: clamp(60px, 6.5vh, 92px) !important;
+  --footer-h: clamp(72px, 7.5vh, 104px) !important;
+}
+
+/* Lock the kiosk to true fullscreen with no rubber-banding */
+html, body { overflow: hidden !important; height: 100% !important; overscroll-behavior: none !important }
+.scaler { width: 100vw; height: 100vh; height: 100dvh; position: fixed; inset: 0; overflow: hidden }
+.kiosk { width: 100%; height: 100%; position: relative; overflow: hidden }
+
+/* Header + footer use the variables — no duplicate values */
+.header { height: var(--header-h) }
+.footer { height: var(--footer-h) }
+.screen, .subscreen { top: var(--header-h); bottom: var(--footer-h) }
+
+/* Every screen: hard-clip overflow, use flex/grid with min-height:0 so content fits */
+.screen { overflow: hidden }
+.screen.active { display: flex; flex-direction: column }
+#screen-welcome.active { display: grid }
+#screen-constitution.active, #screen-writings.active { display: grid }
+
+/* ----- WELCOME — keep simple, centered ----- */
+#screen-welcome { grid-template-columns: 1.1fr 1fr; grid-template-rows: 1fr auto; gap: 0 }
+.welcome-left { padding: clamp(20px, 2.4vw, 56px) clamp(24px, 3vw, 64px) clamp(20px, 2.4vw, 56px) clamp(36px, 4.2vw, 96px); overflow: hidden }
+.welcome-right { padding: clamp(16px, 2vw, 36px); overflow: hidden }
+.welcome-cta-row { padding: 0 clamp(24px, 3vw, 64px) clamp(20px, 2.4vw, 42px); justify-content: center }
+
+/* Constrain monogram so it never blows up at 4K */
+.monogram-frame { width: min(clamp(280px, 24vw, 520px), 90%); height: min(clamp(360px, 30vw, 640px), 88%); max-height: 100% }
+.monogram-svg { width: 75%; height: 75% }
+
+/* Welcome title sized for 4K but minimum still readable */
+.welcome-title { font-size: clamp(40px, 4.2vw, 92px) !important; line-height: 0.95 }
+.welcome-tagline { font-size: clamp(14px, 1.15vw, 24px) !important }
+.quote-card { padding: clamp(14px, 1.2vw, 24px) clamp(18px, 1.6vw, 32px); min-height: clamp(90px, 7vw, 160px); margin-top: clamp(16px, 1.6vw, 32px) }
+.quote-card .quote-text { font-size: clamp(13px, 1.05vw, 20px) }
+
+/* ----- TIMELINE — 3 fixed-height rows: head, strip, detail ----- */
+#screen-timeline { display: none; padding: clamp(20px, 2.2vw, 40px) clamp(24px, 3vw, 56px) clamp(20px, 2.2vw, 40px); gap: clamp(12px, 1.4vw, 28px) }
+#screen-timeline.active { display: grid; grid-template-rows: auto auto 1fr; height: 100% }
+
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: clamp(16px, 1.6vw, 32px); flex-wrap: wrap }
+.section-head h2 { font-size: clamp(28px, 2.6vw, 56px) !important; margin: 0 }
+.section-head .eyebrow { font-size: clamp(10px, 0.65vw, 16px) }
+
+.timeline { padding: clamp(8px, 1vw, 20px) 0; min-height: 0; overflow-x: auto; overflow-y: hidden }
+.timeline-track { padding-bottom: 8px }
+.tl-event { flex: 0 0 clamp(160px, 13vw, 280px) }
+.tl-event .year { font-size: clamp(20px, 2vw, 44px) !important; margin-bottom: clamp(4px, 0.4vw, 10px) }
+.tl-event .label { font-size: clamp(12px, 1vw, 20px) !important }
+
+/* Detail panel — fills the 1fr row, internal grid with controlled overflow */
+.tl-detail {
+  margin: 0 !important; max-height: none !important;
+  display: grid; grid-template-columns: clamp(120px, 11vw, 200px) 1fr clamp(200px, 19vw, 340px);
+  gap: clamp(16px, 1.8vw, 36px);
+  padding: clamp(14px, 1.4vw, 28px) clamp(18px, 1.8vw, 36px);
+  min-height: 0; overflow: hidden;
+}
+.tl-d-left .big-year { font-size: clamp(32px, 3.2vw, 68px) !important }
+.tl-detail .body h3 { font-size: clamp(16px, 1.4vw, 28px) !important; margin-bottom: clamp(4px, 0.4vw, 10px) }
+.tl-detail .body p { font-size: clamp(11px, 0.9vw, 18px) !important; -webkit-line-clamp: 3 }
+.tl-d-fact .val { font-size: clamp(12px, 1vw, 20px) !important }
+.tl-d-quote-block .tl-d-quote-text { font-size: clamp(11px, 0.95vw, 18px) !important; -webkit-line-clamp: 4 }
+
+/* ----- CONSTITUTION — 2 columns, both fully filled ----- */
+#screen-constitution { grid-template-columns: 1.35fr 1fr; gap: 0 }
+.const-left { padding: clamp(20px, 2.4vw, 48px) clamp(20px, 2.4vw, 44px) clamp(20px, 2.4vw, 48px) clamp(32px, 4vw, 88px); gap: clamp(10px, 1vw, 20px); overflow: hidden }
+.const-right { padding: clamp(16px, 2vw, 42px); overflow: hidden }
+.const-title { font-size: clamp(30px, 3vw, 64px) !important }
+.const-stat .num { font-size: clamp(24px, 2.2vw, 46px) !important }
+.const-body { font-size: clamp(12px, 1vw, 18px) !important; line-height: 1.55 }
+.preamble-pull .word { font-size: clamp(18px, 1.7vw, 32px) !important }
+.book-frame { max-width: min(clamp(220px, 18vw, 380px), 75%) }
+
+/* ----- WRITINGS — 2 cols ----- */
+#screen-writings { grid-template-columns: clamp(240px, 20vw, 380px) 1fr; gap: 0 }
+.writings-left { padding: clamp(20px, 2.4vw, 40px) clamp(16px, 1.8vw, 32px) clamp(16px, 1.8vw, 32px) clamp(32px, 4vw, 72px); gap: clamp(10px, 1vw, 18px); overflow: hidden; min-height: 0 }
+.writings-right { padding: clamp(20px, 2.4vw, 40px) clamp(28px, 3.4vw, 64px) clamp(16px, 1.8vw, 32px) clamp(20px, 2.4vw, 44px); gap: clamp(12px, 1.4vw, 24px); min-height: 0 }
+.writings-left h2 { font-size: clamp(22px, 2.2vw, 44px) !important }
+.book-display { grid-template-columns: clamp(120px, 10vw, 220px) 1fr; gap: clamp(18px, 2vw, 40px) }
+.book-meta h3 { font-size: clamp(20px, 2vw, 38px) !important }
+.book-excerpt { padding: clamp(16px, 1.8vw, 36px) clamp(20px, 2.4vw, 44px) }
+
+/* ----- LEGACY — head + tabs + filling panel ----- */
+#screen-legacy { display: none; padding: clamp(20px, 2.2vw, 40px) clamp(24px, 3vw, 56px) clamp(20px, 2.2vw, 40px); gap: clamp(12px, 1.4vw, 24px) }
+#screen-legacy.active { display: grid; grid-template-rows: auto 1fr; height: 100% }
+.legacy-head { gap: clamp(12px, 1.4vw, 24px); margin-bottom: 0 }
+.legacy-head .left h2 { font-size: clamp(26px, 2.4vw, 52px) !important; margin: 0 }
+.legacy-tab { padding: clamp(8px, 0.85vw, 14px) clamp(14px, 1.4vw, 24px); font-size: clamp(10px, 0.7vw, 16px) }
+.legacy-content { min-height: 0 }
+
+/* Conversion */
+.conv-grid { gap: clamp(20px, 2.2vw, 44px) }
+.conv-left .big-stat .num { font-size: clamp(56px, 5.5vw, 120px) !important }
+.conv-left .big-stat .desc { font-size: clamp(13px, 1.1vw, 22px) !important }
+.conv-left .body { font-size: clamp(12px, 1vw, 18px) !important }
+.conv-vows p { font-size: clamp(12px, 1vw, 18px) !important }
+.dharma-wheel { width: clamp(140px, 13vw, 280px); height: clamp(140px, 13vw, 280px) }
+.conv-right h4 { font-size: clamp(15px, 1.3vw, 26px) !important }
+
+/* Reservations */
+.res-grid { gap: clamp(14px, 1.6vw, 28px) }
+.res-card { padding: clamp(18px, 2vw, 36px) }
+.res-card h4 { font-size: clamp(17px, 1.5vw, 28px) !important }
+.res-card .stat-row .val { font-size: clamp(18px, 1.6vw, 30px) !important }
+.res-card .stat-row .lbl { font-size: clamp(11px, 0.95vw, 16px) !important }
+.res-card p { font-size: clamp(11px, 0.95vw, 16px) !important }
+
+/* Honours */
+.hon-grid { gap: clamp(12px, 1.4vw, 24px) }
+.hon-card { padding: clamp(16px, 1.8vw, 32px) }
+.hon-card .medal { width: clamp(44px, 4vw, 72px); height: clamp(44px, 4vw, 72px) }
+.hon-card .medal svg { width: clamp(20px, 1.8vw, 32px); height: clamp(20px, 1.8vw, 32px) }
+.hon-card .year { font-size: clamp(20px, 1.9vw, 36px) !important }
+.hon-card .ttl { font-size: clamp(13px, 1.1vw, 19px) !important }
+.hon-card .desc { font-size: clamp(10px, 0.85vw, 14px) !important }
+
+/* Quote wall */
+.qwall { gap: clamp(12px, 1.4vw, 24px) }
+.qwall .qcell { padding: clamp(18px, 2vw, 36px) clamp(20px, 2.2vw, 40px) }
+.qwall .qcell .q { font-size: clamp(12px, 1.05vw, 20px) !important; -webkit-line-clamp: 5; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden }
+
+/* Reflections */
+.refl-wrap { gap: clamp(10px, 1.2vw, 20px) }
+.reflections { gap: clamp(10px, 1.2vw, 20px) }
+.reflection { padding: clamp(14px, 1.6vw, 28px) clamp(16px, 1.8vw, 32px) }
+.reflection .text { font-size: clamp(12px, 1.05vw, 18px) !important; -webkit-line-clamp: 5; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden }
+.reflection-cta { padding: clamp(12px, 1.3vw, 22px) }
+
+/* Influence */
+.inf-grid { gap: clamp(12px, 1.4vw, 24px) }
+.inf-card { padding: clamp(14px, 1.6vw, 28px) }
+.inf-card h5 { font-size: clamp(14px, 1.25vw, 22px) !important }
+.inf-card p { font-size: clamp(11px, 0.95vw, 16px) !important; -webkit-line-clamp: 4; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden }
+
+/* ----- SUBSCREENS — fill same space as screens ----- */
+.subscreen { display: none }
+.subscreen.show { display: flex; flex-direction: column }
+.subscreen-head { padding: clamp(16px, 1.8vw, 36px) clamp(24px, 3vw, 64px) clamp(12px, 1.4vw, 24px); gap: clamp(16px, 1.6vw, 32px); flex-shrink: 0 }
+.subscreen-head h2 { font-size: clamp(22px, 2vw, 42px) !important; margin: 0 }
+.subscreen-body { flex: 1; min-height: 0; overflow: hidden }
+
+/* Entrance subscreen */
+.entrance-grid { grid-template-columns: 1fr 1fr; height: 100%; overflow: hidden }
+.ent-left { padding: clamp(20px, 2.2vw, 40px) clamp(20px, 2.2vw, 40px) clamp(20px, 2.2vw, 40px) clamp(28px, 3.4vw, 64px); overflow-y: auto; min-height: 0 }
+.ent-right { padding: clamp(20px, 2.2vw, 40px) clamp(28px, 3.4vw, 64px) clamp(20px, 2.2vw, 40px) clamp(20px, 2.2vw, 40px); overflow-y: auto; min-height: 0 }
+
+/* Reader subscreen */
+.reader-grid { grid-template-columns: clamp(220px, 18vw, 320px) 1fr clamp(240px, 20vw, 360px); height: 100% }
+.reader-main { padding: clamp(20px, 2.4vw, 48px) clamp(28px, 3.4vw, 72px) }
+
+/* Flipbook subscreen — book scales with viewport */
+.flipbook-stage { padding: clamp(20px, 2.4vw, 48px) clamp(28px, 3.4vw, 72px) clamp(70px, 8vh, 130px); height: 100% }
+.flipbook { width: min(clamp(560px, 56vw, 1080px), 92%); aspect-ratio: 760/520; max-height: 80% }
+.flip-page { padding: clamp(20px, 2.4vw, 48px) clamp(24px, 2.8vw, 56px) }
+.flip-page h3 { font-size: clamp(16px, 1.5vw, 28px) }
+.flip-page p { font-size: clamp(11.5px, 1vw, 18px); line-height: 1.55; margin-bottom: clamp(6px, 0.7vw, 12px) }
+.flip-page p.opener { font-size: clamp(13px, 1.2vw, 20px) }
+.flip-page .footnote { font-size: clamp(9px, 0.7vw, 13px) }
+
+/* Footer nav buttons */
+.nav-btn { min-width: clamp(120px, 11vw, 240px); height: clamp(44px, 4.6vh, 64px); font-size: clamp(12px, 1.05vw, 19px) }
+.nav-btn .num { font-size: clamp(10px, 0.7vw, 14px) }
+
+/* Header lang switch + brand */
+.brand-text .top { font-size: clamp(9px, 0.65vw, 13px) }
+.brand-text .main { font-size: clamp(15px, 1.3vw, 26px) }
+.lang-btn { padding: clamp(8px, 0.9vw, 14px) clamp(20px, 2vw, 36px); font-size: clamp(12px, 1vw, 17px) }
+.clock { font-size: clamp(12px, 1.1vw, 18px) }
+.weather { font-size: clamp(9px, 0.65vw, 13px) }
+
+/* Modals — center, max bounds */
+.modal { max-width: min(1200px, 92vw); max-height: 90vh }
+
+/* ============================================================
+   SCREENSHOT FIXES — final pass, addresses every visual bug
+   ============================================================ */
+
+/* IMG 1 — lang switcher pill is too wide. Center column was stretched */
+.header { grid-template-columns: 1fr auto 1fr !important }
+.lang-switch { width: auto; flex-shrink: 0 }
+.lang-btn { padding: clamp(8px, 0.7vw, 12px) clamp(14px, 1.3vw, 22px) !important; font-size: clamp(11px, 0.85vw, 15px) !important }
+
+/* IMG 2 — Hindi facts row leaks outside the panel. The lang switching
+   sets display:block on each lang-block which puts hi+te below en flow.
+   Force only the active language's facts row to render */
+.tl-d-facts > [lang-block] { display: none !important }
+[data-lang="en"] .tl-d-facts > [lang-block="en"],
+[data-lang="hi"] .tl-d-facts > [lang-block="hi"],
+[data-lang="te"] .tl-d-facts > [lang-block="te"] { display: flex !important }
+
+/* IMG 3 — "Open Flipbook" button stretches too wide; cap it */
+.book-meta button { align-self: flex-start; max-width: max-content }
+.book-meta > button[onclick*="openSub"] { padding: clamp(10px, 1vw, 16px) clamp(18px, 1.8vw, 28px) !important; max-width: 300px }
+
+/* IMG 3 — writings-list (left rail) was being clipped at the bottom.
+   Make sure it scrolls inside its column instead of overflowing */
+.writings-left { overflow: hidden !important }
+.writings-list { flex: 1 1 0; min-height: 0; overflow-y: auto !important }
+
+/* IMG 4, 5, 6, 7, 8 — Legacy panel content extends below the footer.
+   Root cause: legacy-content lacks proper height containment.
+   Force the panel grids to scroll INSIDE their fixed-height container */
+#screen-legacy { overflow: hidden }
+.legacy-content { flex: 1 1 0 !important; min-height: 0 !important; overflow: hidden !important; position: relative }
+.legacy-panel { position: absolute !important; inset: 0 !important; overflow: hidden !important }
+.legacy-panel.active { display: flex !important; flex-direction: column !important }
+
+/* Each grid panel: never exceed the panel's height; scroll if 2+ rows don't fit */
+.conv-grid, .res-grid, .hon-grid, .qwall, .inf-grid, .refl-wrap {
+  flex: 1 1 0 !important; min-height: 0 !important;
+  overflow-y: auto !important; overflow-x: hidden !important;
+  align-content: start !important;
+  padding-right: 4px;
+}
+
+/* Visitor reflections wrap is the parent of the grid AND the CTA — split into scrollable grid + fixed CTA */
+.refl-wrap { display: flex !important; flex-direction: column !important; overflow: hidden !important }
+.refl-wrap .reflections {
+  flex: 1 1 0 !important; min-height: 0 !important;
+  overflow-y: auto !important; padding-right: 4px;
+  grid-auto-rows: min-content !important;
+}
+.refl-wrap .reflection-cta { flex-shrink: 0 !important }
+
+/* Auto-row sizing for these grids so cards stay readable when scrolling kicks in */
+.hon-grid, .qwall, .inf-grid {
+  grid-auto-rows: min-content !important;
+}
+
+/* Custom scrollbar styling for panel scroll */
+.conv-grid::-webkit-scrollbar,
+.res-grid::-webkit-scrollbar,
+.hon-grid::-webkit-scrollbar,
+.qwall::-webkit-scrollbar,
+.inf-grid::-webkit-scrollbar,
+.refl-wrap::-webkit-scrollbar,
+.refl-wrap .reflections::-webkit-scrollbar { width: 6px }
+.conv-grid::-webkit-scrollbar-thumb,
+.res-grid::-webkit-scrollbar-thumb,
+.hon-grid::-webkit-scrollbar-thumb,
+.qwall::-webkit-scrollbar-thumb,
+.inf-grid::-webkit-scrollbar-thumb,
+.refl-wrap::-webkit-scrollbar-thumb,
+.refl-wrap .reflections::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 3px }
+
+/* IMG 4 — reservation cards: ensure card content fits & paragraphs visible */
+.res-card p { display: block !important; overflow: visible !important }
+
+/* IMG 5 — honour card titles getting overlapped — give cards min-height */
+.hon-card { min-height: clamp(180px, 18vh, 240px) }
+
+/* IMG 7 — influence cards getting cut */
+.inf-card { min-height: clamp(180px, 18vh, 240px) }
+
+
 [data-lang="en"] [lang-block="en"], [data-lang="hi"] [lang-block="hi"], [data-lang="te"] [lang-block="te"]{display:block}
 [data-lang="en"] span[lang-block="en"], [data-lang="hi"] span[lang-block="hi"], [data-lang="te"] span[lang-block="te"]{display:inline}
 
@@ -744,9 +1188,9 @@ body{
 }
 .attract-touch::after{animation-delay:1.25s}
 @keyframes ripple{0%{transform:scale(1);opacity:1}100%{transform:scale(2);opacity:0}}
-.attract-touch svg{width:48px;height:48px;color:var(--saffron)}
-.attract-text{font-family:'Fraunces',serif;font-size:38px;color:var(--ivory);font-weight:400;letter-spacing:-.5px;margin-bottom:8px;font-style:italic}
-.attract-sub{font-family:'Inter',sans-serif;font-size:13px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:500}
+.attract-touch svg{width:clamp(36px, 2.6vw, 56px);height:clamp(36px, 2.6vw, 56px);color:var(--saffron)}
+.attract-text{font-family:'Fraunces',serif;font-size:clamp(29.6px, 1.979vw, 57.0px);color:var(--ivory);font-weight:400;letter-spacing:-.5px;margin-bottom:8px;font-style:italic}
+.attract-sub{font-family:'Inter',sans-serif;font-size:clamp(10.1px, 0.677vw, 19.5px);letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:500}
 
 /* ============ PASSWORD GATE ============ */
 .gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 20% 0%, rgba(201,122,43,.12), transparent 50%),radial-gradient(ellipse at 80% 100%, rgba(47,107,101,.15), transparent 50%),linear-gradient(180deg, #0e1a2b 0%, #0a1422 100%);padding:24px}
@@ -755,18 +1199,18 @@ body{
 .gate-mark{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--saffron), var(--saffron-2));display:grid;place-items:center;margin:0 auto 24px;box-shadow:0 8px 32px var(--saffron-glow), inset 0 -2px 6px rgba(0,0,0,.3);position:relative}
 .gate-mark::after{content:"";position:absolute;inset:10px;border-radius:50%;border:1.5px solid rgba(245,239,226,.6)}
 .gate-mark svg{width:28px;height:28px;color:#fff}
-.gate-eyebrow{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.gate-title{font-family:'Fraunces',serif;font-size:26px;font-weight:400;color:var(--ivory);letter-spacing:-.5px;margin-bottom:10px;line-height:1.2}
+.gate-eyebrow{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.gate-title{font-family:'Fraunces',serif;font-size:clamp(20.3px, 1.354vw, 39.0px);font-weight:400;color:var(--ivory);letter-spacing:-.5px;margin-bottom:10px;line-height:1.2}
 .gate-title em{font-style:italic;color:var(--saffron);font-weight:300}
-.gate-sub{font-family:'Fraunces',serif;font-size:14px;color:var(--ivory-2);opacity:.7;margin-bottom:32px;font-style:italic;line-height:1.5}
-.gate-input{width:100%;padding:14px 18px;background:rgba(245,239,226,.06);border:1px solid var(--line-strong);border-radius:12px;color:var(--ivory);font-family:'Inter',sans-serif;font-size:15px;letter-spacing:1px;text-align:center;outline:none;transition:all .2s}
+.gate-sub{font-family:'Fraunces',serif;font-size:clamp(10.9px, 0.729vw, 21.0px);color:var(--ivory-2);opacity:.7;margin-bottom:32px;font-style:italic;line-height:1.5}
+.gate-input{width:100%;padding:14px 18px;background:rgba(245,239,226,.06);border:1px solid var(--line-strong);border-radius:12px;color:var(--ivory);font-family:'Inter',sans-serif;font-size:clamp(11.7px, 0.781vw, 22.5px);letter-spacing:1px;text-align:center;outline:none;transition:all .2s}
 .gate-input:focus{border-color:var(--saffron);background:rgba(245,239,226,.08);box-shadow:0 0 0 4px rgba(201,122,43,.15)}
 .gate-input::placeholder{color:rgba(245,239,226,.3);letter-spacing:2px}
-.gate-btn{width:100%;margin-top:14px;padding:14px;background:var(--saffron);color:#fff;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .2s}
+.gate-btn{width:100%;margin-top:14px;padding:14px;background:var(--saffron);color:#fff;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-size:clamp(10.1px, 0.677vw, 19.5px);letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .2s}
 .gate-btn:hover{background:var(--saffron-2);box-shadow:0 8px 24px var(--saffron-glow)}
-.gate-error{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1.5px;color:#d96852;margin-top:14px;min-height:16px;text-transform:uppercase;opacity:0;transition:opacity .2s}
+.gate-error{font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:1.5px;color:#d96852;margin-top:14px;min-height:16px;text-transform:uppercase;opacity:0;transition:opacity .2s}
 .gate-error.show{opacity:1}
-.gate-footer{margin-top:36px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);opacity:.5;text-transform:uppercase}
+.gate-footer{margin-top:clamp(27.0px, 1.875vw, 54.0px);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);opacity:.5;text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -950,6 +1394,12 @@ body{
         <span lang-block="te">యాత్ర ప్రారంభించండి</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
+      <button onclick="openSub('entrance')" style="margin-left:14px;padding:18px 28px;background:rgba(245,239,226,.06);color:var(--ivory);border:1px solid var(--line-strong);border-radius:999px;font-family:'Inter',sans-serif;font-size:clamp(9.4px, 0.625vw, 18.0px);letter-spacing:2.5px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="width:16px;height:16px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        <span lang-block="en">G1 · Entrance Kiosk</span>
+        <span lang-block="hi">G1 · प्रवेश</span>
+        <span lang-block="te">G1 · ప్రవేశం</span>
+      </button>
     </div>
   </section>
 
@@ -987,16 +1437,34 @@ body{
     </div>
 
     <div class="tl-detail">
-      <div class="big-year" id="tl-d-year">1891</div>
+      <div class="tl-d-left">
+        <div class="big-year" id="tl-d-year">1891</div>
+        <div class="tl-d-loc" id="tl-d-loc">Mhow · Madhya Pradesh</div>
+        <div class="tl-d-age" id="tl-d-age">Age — at birth</div>
+      </div>
       <div class="body">
+        <div class="tl-d-eyebrow">
+          <span lang-block="en">EVENT · GALLERY 02</span>
+          <span lang-block="hi">घटना · गैलरी ०२</span>
+          <span lang-block="te">సంఘటన · గ్యాలరీ ౦౨</span>
+        </div>
         <h3 id="tl-d-title">—</h3>
         <p id="tl-d-text">—</p>
+        <div class="tl-d-facts" id="tl-d-facts"></div>
       </div>
-      <button class="more" onclick="openModal('article-life')">
-        <span lang-block="en">Read More</span>
-        <span lang-block="hi">और पढ़ें</span>
-        <span lang-block="te">మరిన్ని</span>
-      </button>
+      <div class="tl-d-side">
+        <div class="tl-d-quote-block">
+          <div class="tl-d-quote-mark">"</div>
+          <div class="tl-d-quote-text" id="tl-d-quote">—</div>
+          <div class="tl-d-quote-src" id="tl-d-quote-src">— Dr. B. R. Ambedkar</div>
+        </div>
+        <button class="more" onclick="openModal('article-life')">
+          <span lang-block="en">Full Story</span>
+          <span lang-block="hi">पूरी कहानी</span>
+          <span lang-block="te">పూర్తి కథ</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -1056,6 +1524,10 @@ body{
       </div>
 
       <div class="const-actions">
+        <button class="btn" onclick="openSub('reader')" style="background:linear-gradient(180deg, var(--saffron), var(--saffron-2));border-color:var(--saffron);color:#fff">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg>
+          <span><span lang-block="en">Open Reader</span><span lang-block="hi">पाठक खोलें</span><span lang-block="te">పఠనం</span></span>
+        </button>
         <button class="btn" onclick="openModal('preamble')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h10a2 2 0 0 1 2 2v14H8a2 2 0 0 1-2-2V4z"/><line x1="10" y1="9" x2="14" y2="9"/><line x1="10" y1="13" x2="14" y2="13"/></svg>
           <span><span lang-block="en">Read Preamble</span><span lang-block="hi">प्रस्तावना</span><span lang-block="te">ప్రవేశిక</span></span>
@@ -1609,38 +2081,40 @@ body{
 
       <!-- Visitor reflections -->
       <div class="legacy-panel" data-panel="reflections">
-        <div class="reflections">
-          <div class="reflection">
-            <div class="text">"Walking through this gallery, I realised how much of what I take for granted — the right to vote, to speak, to learn — came from his pen."</div>
-            <div class="meta"><span class="name">Pooja R.</span><span class="date">Bengaluru · Apr 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"My grandfather marched at Mahad in 1927. To see his story told with such dignity here moves me beyond words."</div>
-            <div class="meta"><span class="name">Sandesh K.</span><span class="date">Pune · Mar 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"I had only known him as the man on the currency note. Today I have met him as a philosopher, an economist, a friend of women."</div>
-            <div class="meta"><span class="name">Vidya S.</span><span class="date">Hyderabad · Apr 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"Brought my class of grade 9 students. The Constitution browser was the highlight — they argued about Article 19 for an hour."</div>
-            <div class="meta"><span class="name">Mrs. Rao</span><span class="date">Warangal · Mar 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"Babasaheb belongs to all of India. Beautiful to see his story told without making him a deity. He was a thinker first."</div>
-            <div class="meta"><span class="name">Imran A.</span><span class="date">Hyderabad · Apr 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"The 22 vows section made me weep. I had read them before but never felt their weight until now."</div>
-            <div class="meta"><span class="name">Anjali D.</span><span class="date">Nagpur · Apr 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"I came expecting a statue. I leave with five books on my reading list."</div>
-            <div class="meta"><span class="name">Karthik V.</span><span class="date">Vijayawada · Mar 2026</span></div>
-          </div>
-          <div class="reflection">
-            <div class="text">"Jai Bhim. This gallery honours him in the way he would have wanted — through knowledge, not iconography."</div>
-            <div class="meta"><span class="name">Suresh M.</span><span class="date">Mumbai · Mar 2026</span></div>
+        <div class="refl-wrap">
+          <div class="reflections">
+            <div class="reflection">
+              <div class="text">"Walking through this gallery, I realised how much of what I take for granted — the right to vote, to speak, to learn — came from his pen."</div>
+              <div class="meta"><span class="name">Pooja R.</span><span class="date">Bengaluru · Apr 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"My grandfather marched at Mahad in 1927. To see his story told with such dignity here moves me beyond words."</div>
+              <div class="meta"><span class="name">Sandesh K.</span><span class="date">Pune · Mar 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"I had only known him as the man on the currency note. Today I have met him as a philosopher, an economist, a friend of women."</div>
+              <div class="meta"><span class="name">Vidya S.</span><span class="date">Hyderabad · Apr 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"Brought my class of grade 9 students. The Constitution browser was the highlight — they argued about Article 19 for an hour."</div>
+              <div class="meta"><span class="name">Mrs. Rao</span><span class="date">Warangal · Mar 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"Babasaheb belongs to all of India. Beautiful to see his story told without making him a deity. He was a thinker first."</div>
+              <div class="meta"><span class="name">Imran A.</span><span class="date">Hyderabad · Apr 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"The 22 vows section made me weep. I had read them before but never felt their weight until now."</div>
+              <div class="meta"><span class="name">Anjali D.</span><span class="date">Nagpur · Apr 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"I came expecting a statue. I leave with five books on my reading list."</div>
+              <div class="meta"><span class="name">Karthik V.</span><span class="date">Vijayawada · Mar 2026</span></div>
+            </div>
+            <div class="reflection">
+              <div class="text">"Jai Bhim. This gallery honours him in the way he would have wanted — through knowledge, not iconography."</div>
+              <div class="meta"><span class="name">Suresh M.</span><span class="date">Mumbai · Mar 2026</span></div>
+            </div>
           </div>
           <div class="reflection-cta">
             <span lang-block="en">+ Share your reflection on the exit kiosk</span>
@@ -1652,6 +2126,231 @@ body{
 
     </div>
   </section>
+
+  <!-- ============ SUBSCREEN: ENTRANCE (G1 · BOQ #17) ============ -->
+  <div class="subscreen" id="sub-entrance">
+    <div class="subscreen-head">
+      <div class="left">
+        <div class="crumb">
+          <span>BOQ #17</span><span class="sep">·</span><span>G1 · Entrance (65")</span><span class="sep">·</span><span>Welcome &amp; Orienteer</span>
+        </div>
+        <h2>
+          <span lang-block="en">Welcome to the <em>Statue of Equality</em></span>
+          <span lang-block="hi">समता मूर्ति में <em>आपका स्वागत</em></span>
+          <span lang-block="te"><em>సమతా విగ్రహానికి</em> స్వాగతం</span>
+        </h2>
+      </div>
+      <div class="right">
+        <button class="sub-close" onclick="closeSub()" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="subscreen-body">
+      <div class="entrance-grid">
+        <div class="ent-left">
+          <div class="museum-vision">
+            <div class="lbl">Museum Vision</div>
+            <p>
+              <span lang-block="en">"This memorial is not a monument to a man. It is a monument to the idea that every life carries equal dignity — an idea Dr. B. R. Ambedkar fought to make law."</span>
+              <span lang-block="hi">"यह स्मारक एक व्यक्ति का नहीं — एक विचार का है। हर जीवन की समान गरिमा का विचार, जिसे डॉ. आम्बेडकर ने क़ानून बनाने के लिए संघर्ष किया।"</span>
+              <span lang-block="te">"ఈ స్మారకం ఒక వ్యక్తికి కాదు — ఒక ఆలోచనకు. ప్రతి జీవితానికీ సమాన గౌరవం ఉందనే ఆలోచనకు, దాన్ని చట్టం చేయడానికి డా. అంబేడ్కర్ పోరాడారు."</span>
+            </p>
+          </div>
+
+          <div class="ent-stats-row">
+            <div class="ent-stat"><div class="n">125 ft</div><div class="l">Bronze statue</div></div>
+            <div class="ent-stat"><div class="n">11.8 ac</div><div class="l">Campus</div></div>
+            <div class="ent-stat"><div class="n">26,258</div><div class="l">SQ FT Galleries</div></div>
+            <div class="ent-stat"><div class="n">2023</div><div class="l">Opened · 14 Apr</div></div>
+          </div>
+
+          <div class="ent-section">
+            <h4>
+              <span lang-block="en">Telangana &amp; Hyderabad Connection</span>
+              <span lang-block="hi">तेलंगाना और हैदराबाद</span>
+              <span lang-block="te">తెలంగాణ - హైదరాబాద్</span>
+            </h4>
+            <p>
+              <span lang-block="en">Hyderabad's choice to host the world's tallest statue of Dr. Ambedkar reflects Telangana's distinct constitutional history — the state was reorganised under principles he authored, and continues to draw on his ideas of equal opportunity in active policy.</span>
+              <span lang-block="hi">हैदराबाद का यह स्थान बाबासाहेब के सिद्धांतों पर तेलंगाना की अनूठी संवैधानिक यात्रा को दर्शाता है।</span>
+              <span lang-block="te">హైదరాబాద్ ఎంపిక ఆయన సిద్ధాంతాల ఆధారంగా తెలంగాణ రాజ్యాంగ ప్రత్యేకతను ప్రతిబింబిస్తుంది.</span>
+            </p>
+          </div>
+
+          <div class="ent-section">
+            <h4>
+              <span lang-block="en">Custodians &amp; Builders</span>
+              <span lang-block="hi">रक्षक और निर्माता</span>
+              <span lang-block="te">పోషకులు, నిర్మాతలు</span>
+            </h4>
+            <div class="donor-row">
+              <div class="d"><div class="ttl">HMDA</div><div class="role">Project Authority</div></div>
+              <div class="d"><div class="ttl">Govt. of Telangana</div><div class="role">Patron</div></div>
+              <div class="d"><div class="ttl">Samar Ramachandra</div><div class="role">Consultant</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ent-right">
+          <h4>
+            <span lang-block="en">Your Path Through the Galleries</span>
+            <span lang-block="hi">गैलरी का मार्ग</span>
+            <span lang-block="te">గ్యాలరీల మార్గం</span>
+          </h4>
+          <div class="gallery-map-grid">
+            <div class="gm-card" onclick="closeSub();">
+              <div class="gm-num">G1</div>
+              <div class="gm-ttl"><span lang-block="en">Introduction</span><span lang-block="hi">परिचय</span><span lang-block="te">పరిచయం</span></div>
+              <div class="gm-sub">Entrance · Transformation Zone</div>
+            </div>
+            <div class="gm-card" onclick="closeSub();goTo('writings');">
+              <div class="gm-num">G2</div>
+              <div class="gm-ttl"><span lang-block="en">Library</span><span lang-block="hi">पुस्तकालय</span><span lang-block="te">గ్రంథాలయం</span></div>
+              <div class="gm-sub">Literary Works · 65"</div>
+            </div>
+            <div class="gm-card" onclick="closeSub();openSub('aoc');">
+              <div class="gm-num">G3</div>
+              <div class="gm-ttl"><span lang-block="en">Class &amp; Caste</span><span lang-block="hi">वर्ग और जाति</span><span lang-block="te">వర్గం &amp; కులం</span></div>
+              <div class="gm-sub">AoC flipbook · 85" loop · ×4 kiosks</div>
+            </div>
+            <div class="gm-card" onclick="closeSub();goTo('constitution');">
+              <div class="gm-num">G4</div>
+              <div class="gm-ttl"><span lang-block="en">Constitution</span><span lang-block="hi">संविधान</span><span lang-block="te">రాజ్యాంగం</span></div>
+              <div class="gm-sub">Reader · CAD explorer · ×14 kiosks</div>
+            </div>
+            <div class="gm-card" onclick="closeSub();goTo('legacy');">
+              <div class="gm-num">G6</div>
+              <div class="gm-ttl"><span lang-block="en">Modern India</span><span lang-block="hi">आधुनिक भारत</span><span lang-block="te">ఆధునిక భారత్</span></div>
+              <div class="gm-sub">3 films · RBI · Labour · Planning</div>
+            </div>
+            <div class="gm-card" onclick="closeSub();goTo('legacy');">
+              <div class="gm-num">G7</div>
+              <div class="gm-ttl"><span lang-block="en">The World</span><span lang-block="hi">विश्व</span><span lang-block="te">ప్రపంచం</span></div>
+              <div class="gm-sub">Global Influence Atlas · 55"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SUBSCREEN: CONSTITUTION READER (G4 · BOQ #9) ============ -->
+  <div class="subscreen" id="sub-reader">
+    <div class="subscreen-head">
+      <div class="left">
+        <div class="crumb">
+          <span>BOQ #9</span><span class="sep">·</span><span>G4 · Constitution (32")</span><span class="sep">·</span><span>Multilingual Reader</span>
+        </div>
+        <h2>
+          <span lang-block="en">The <em>Constitution</em> Reader</span>
+          <span lang-block="hi"><em>संविधान</em> पाठक</span>
+          <span lang-block="te"><em>రాజ్యాంగ</em> పఠనం</span>
+        </h2>
+      </div>
+      <div class="right">
+        <button class="sub-close" onclick="closeSub()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="subscreen-body">
+      <div class="reader-grid">
+        <!-- TOC -->
+        <aside class="reader-toc">
+          <h4><span lang-block="en">Articles</span><span lang-block="hi">अनुच्छेद</span><span lang-block="te">అధికరణలు</span></h4>
+          <input class="toc-search" placeholder="Search articles, keywords…" id="reader-search">
+
+          <div class="toc-section">Preamble</div>
+          <div class="toc-list" id="toc-preamble">
+            <div class="toc-item active" data-art="preamble"><span class="n">P</span><span>Preamble</span></div>
+          </div>
+
+          <div class="toc-section">Part III · Fundamental Rights</div>
+          <div class="toc-list" id="toc-rights"></div>
+
+          <div class="toc-section">Part IV · Directive Principles</div>
+          <div class="toc-list" id="toc-directives"></div>
+
+          <div class="toc-section">Part IV-A · Fundamental Duties</div>
+          <div class="toc-list" id="toc-duties"></div>
+        </aside>
+
+        <!-- Main reader -->
+        <div class="reader-main" id="reader-main">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Context sidebar -->
+        <aside class="reader-context">
+          <h4><span lang-block="en">Audio Narration</span><span lang-block="hi">ऑडियो</span><span lang-block="te">ఆడియో</span></h4>
+          <div class="audio-player">
+            <button class="play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg></button>
+            <div class="info">
+              <div class="t" id="audio-title">Article 14 · Equality</div>
+              <div class="d">EN · 1:24 · By Naveen Joshi</div>
+            </div>
+          </div>
+
+          <h4 style="margin-top:clamp(13.5px, 0.938vw, 27.0px)"><span lang-block="en">Drafting Context</span><span lang-block="hi">रचना संदर्भ</span><span lang-block="te">రచనా సందర్భం</span></h4>
+          <div class="context-card" id="context-card">
+            <div class="ttl">From the Drafting Committee</div>
+            <p>Dr. Ambedkar argued that equality before law was the floor — not the ceiling. The state must intervene where social conditions deny that floor.</p>
+          </div>
+
+          <h4 style="margin-top:clamp(13.5px, 0.938vw, 27.0px)"><span lang-block="en">Cited Authorities</span><span lang-block="hi">उद्धृत प्राधिकारी</span><span lang-block="te">ఉదహరించిన అధికారాలు</span></h4>
+          <div class="context-card">
+            <div class="ttl">Maneka Gandhi v. Union of India</div>
+            <p>1978 SC 597 · Article 14 read with Article 21 and Article 19 — the golden triangle.</p>
+          </div>
+          <div class="context-card">
+            <div class="ttl">E. P. Royappa v. State of T.N.</div>
+            <p>1974 SC 555 · Equality as antithesis of arbitrariness.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SUBSCREEN: ANNIHILATION OF CASTE FLIPBOOK (G3 · BOQ #12) ============ -->
+  <div class="subscreen" id="sub-aoc">
+    <div class="subscreen-head">
+      <div class="left">
+        <div class="crumb">
+          <span>BOQ #12</span><span class="sep">·</span><span>G3 · Class &amp; Caste (Surface Table)</span><span class="sep">·</span><span>First Edition Flipbook</span>
+        </div>
+        <h2>
+          <span lang-block="en">Annihilation of <em>Caste</em></span>
+          <span lang-block="hi">जाति का <em>उन्मूलन</em></span>
+          <span lang-block="te">కుల <em>నిర్మూలన</em></span>
+        </h2>
+      </div>
+      <div class="right">
+        <button class="sub-close" onclick="closeSub()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="subscreen-body">
+      <div class="flipbook-stage">
+        <div class="flipbook-meta">
+          First Edition · 1936<div class="ttl">B. R. Ambedkar · Self-published</div>
+        </div>
+
+        <div class="flipbook" id="flipbook">
+          <!-- Pages populated by JS -->
+        </div>
+
+        <div class="flipbook-controls">
+          <button class="nav" id="fb-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="progress" id="fb-prog">2 / 10</div>
+          <button class="nav" id="fb-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+          <button class="zoom" aria-label="Zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></button>
+          <button class="bm" aria-label="Bookmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ATTRACT OVERLAY -->
   <div class="attract" id="attract" onclick="dismissAttract()">
@@ -1786,10 +2485,10 @@ body{
         </button>
       </div>
       <div class="modal-body">
-        <div style="font-family:'Fraunces',serif;font-size:78px;font-weight:300;color:var(--saffron);letter-spacing:-2px;line-height:1;margin-bottom:12px" id="life-year">1891</div>
-        <div style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:24px" id="life-loc">—</div>
-        <div style="font-size:17px;line-height:1.7;color:var(--ivory-2);max-width:720px" id="life-text">—</div>
-        <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;opacity:.7">
+        <div style="font-family:'Fraunces',serif;font-size:clamp(60.8px, 4.062vw, 117.0px);font-weight:300;color:var(--saffron);letter-spacing:-2px;line-height:1;margin-bottom:12px" id="life-year">1891</div>
+        <div style="font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:24px" id="life-loc">—</div>
+        <div style="font-size:clamp(13px, 1.15vw, 17px);line-height:1.7;color:var(--ivory-2);max-width:720px" id="life-text">—</div>
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2px;color:var(--gold);text-transform:uppercase;opacity:.7">
           <span lang-block="en">Source: Gallery archive · vkstudio research notes</span>
           <span lang-block="hi">स्रोत: गैलरी अभिलेखागार</span>
           <span lang-block="te">మూలం: గ్యాలరీ ఆర్కైవ్</span>
@@ -1854,17 +2553,9 @@ function checkPass(ev){
 }
 try{ if (sessionStorage.getItem('demo_unlocked') === '1') document.getElementById('gate').classList.add('hidden'); }catch(e){}
 
-/* FIT 16:9 INTO VIEWPORT */
-function fitKiosk(){
-  const k = document.querySelector('.kiosk');
-  if (!k) return;
-  const W = window.innerWidth, H = window.innerHeight;
-  const s = Math.min(W/1920, H/1080);
-  k.style.transform = `scale(${s})`;
-}
-window.addEventListener('resize', fitKiosk);
-window.addEventListener('load', () => { fitKiosk(); initParticles(); startIdle(); });
-fitKiosk();
+/* FLUID LAYOUT — no scaling needed */
+function fitKiosk(){ /* no-op for fluid layout */ }
+window.addEventListener('load', () => { initParticles(); startIdle(); });
 
 /* LANGUAGE */
 const kiosk = document.querySelector('.kiosk');
@@ -1880,6 +2571,7 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 /* ROUTER */
 function goTo(screen){
+  document.querySelectorAll('.subscreen').forEach(s => s.classList.remove('show'));
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-'+screen).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -1900,7 +2592,7 @@ function openModal(name){
 function closeModal(){
   document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('show'));
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeSub(); } });
 
 /* CLOCK */
 function tick(){
@@ -1971,46 +2663,145 @@ setInterval(() => { quoteIdx = (quoteIdx + 1) % quotes.length; showQuote(quoteId
 
 /* TIMELINE DATA */
 const events = [
-  {year:1891, age:'Born', loc:'Mhow, MP',
-    en:{t:'Birth at Mhow', x:'Bhimrao Ramji Ambedkar is born on 14 April 1891 in the military cantonment of Mhow (now Dr. Ambedkar Nagar), Madhya Pradesh, the 14th and last child of Ramji Maloji Sakpal, a Subedar in the British Indian Army, and Bhimabai. Born into the Mahar caste, he experiences the indignities of untouchability from his earliest school years.'},
-    hi:{t:'महू में जन्म', x:'भीमराव रामजी आम्बेडकर का जन्म 14 अप्रैल 1891 को महू (मध्य प्रदेश) के सैन्य छावनी में हुआ।'},
-    te:{t:'మహౌలో జననం', x:'భీమ్‌రావ్ రామ్‌జీ అంబేడ్కర్ ౧౮౯౧ ఏప్రిల్ ౧౪న మహౌలో జన్మించారు.'}},
-  {year:1907, age:'Age 16', loc:'Bombay',
-    en:{t:'Matriculation', x:'First "untouchable" in his region to pass the matriculation examination — a public celebration is held in his honour, where Krishnaji Arjun Keluskar presents him a biography of the Buddha.'},
-    hi:{t:'मैट्रिक उत्तीर्ण', x:'अपने क्षेत्र के पहले "अछूत" जिन्होंने मैट्रिक की परीक्षा उत्तीर्ण की।'},
-    te:{t:'మెట్రిక్యులేషన్', x:'తన ప్రాంతంలో మెట్రిక్యులేషన్ ఉత్తీర్ణుడైన మొదటి "అంటరాని" వ్యక్తి.'}},
-  {year:1913, age:'Age 22', loc:'New York',
-    en:{t:'Columbia University', x:'Awarded a scholarship by the Maharaja of Baroda to study at Columbia University, New York. Earns MA in 1915 and PhD in 1927 with thesis "The Problem of the Rupee".'},
-    hi:{t:'कोलंबिया विश्वविद्यालय', x:'बड़ौदा के महाराजा से छात्रवृत्ति पाकर कोलंबिया विश्वविद्यालय में अध्ययन।'},
-    te:{t:'కొలంబియా యూనివర్సిటీ', x:'బరోడా మహారాజు స్కాలర్‌షిప్‌తో కొలంబియా యూనివర్సిటీలో చదువు.'}},
-  {year:1916, age:'Age 25', loc:'London',
-    en:{t:'London School of Economics', x:'Enrols at LSE for D.Sc. in Economics and at Gray\'s Inn to train for the Bar — a rare double-track that shapes both his economic and constitutional thought.'},
-    hi:{t:'लंदन स्कूल ऑफ इकोनॉमिक्स', x:'LSE में अर्थशास्त्र में D.Sc.।'},
-    te:{t:'లండన్ స్కూల్ ఆఫ్ ఎకనామిక్స్', x:'LSEలో D.Sc. చదువు.'}},
-  {year:1927, age:'Age 36', loc:'Mahad',
-    en:{t:'Mahad Satyagraha', x:'Leads thousands of Dalits to drink from the public Chavdar tank — asserting the right of every citizen to use public water. The first organised non-violent civil-rights agitation in modern India.'},
-    hi:{t:'महाड़ सत्याग्रह', x:'सार्वजनिक चवदार तालाब से जल पीने के लिए हजारों दलितों का नेतृत्व।'},
-    te:{t:'మహాడ్ సత్యాగ్రహం', x:'వేలాది దళితులను చౌదర్ చెరువు నుండి నీరు త్రాగడానికి నడిపించారు.'}},
-  {year:1930, age:'Age 39', loc:'London',
-    en:{t:'Round Table Conferences', x:'Represents the Depressed Classes at the Round Table Conferences in London — argues for separate electorates that later become reserved seats.'},
-    hi:{t:'गोलमेज सम्मेलन', x:'लंदन में गोलमेज सम्मेलनों में अवसादित वर्गों का प्रतिनिधित्व।'},
-    te:{t:'రౌండ్ టేబుల్ సమావేశాలు', x:'లండన్‌లో రౌండ్ టేబుల్ సమావేశాల్లో ప్రాతినిధ్యం.'}},
-  {year:1936, age:'Age 45', loc:'Lahore',
-    en:{t:'Annihilation of Caste', x:'Drafts what becomes one of the most influential anti-caste texts ever written. The Jat-Pat-Todak Mandal cancels the address; he publishes it himself.'},
-    hi:{t:'जाति का उन्मूलन', x:'जाति विरोधी अब तक का सर्वाधिक प्रभावी ग्रंथ।'},
-    te:{t:'అనిహిలేషన్ ఆఫ్ క్యాస్ట్', x:'కులవ్యతిరేక రచనల్లో అత్యంత ప్రభావవంతమైనది.'}},
-  {year:1947, age:'Age 56', loc:'New Delhi',
-    en:{t:'Chairman, Drafting Committee', x:'Independent India\'s first Law Minister. On 29 August 1947, the Constituent Assembly elects him Chairman of the Drafting Committee — the post that will shape every clause of the Constitution.'},
-    hi:{t:'अध्यक्ष, मसौदा समिति', x:'29 अगस्त 1947 को मसौदा समिति का अध्यक्ष चुना गया।'},
-    te:{t:'డ్రాఫ్టింగ్ కమిటీ చైర్మన్', x:'౧౯౪౭ ఆగస్టు ౨౯న డ్రాఫ్టింగ్ కమిటీ చైర్మన్‌గా ఎన్నికయ్యారు.'}},
-  {year:1950, age:'Age 59', loc:'New Delhi',
-    en:{t:'Constitution Adopted', x:'On 26 January 1950 the Constitution of India comes into force. The longest written constitution of any sovereign country in the world.'},
-    hi:{t:'संविधान लागू', x:'26 जनवरी 1950 को भारत का संविधान लागू हुआ।'},
-    te:{t:'రాజ్యాంగం అమల్లోకి', x:'౧౯౫౦ జనవరి ౨౬న భారత రాజ్యాంగం అమల్లోకి వచ్చింది.'}},
-  {year:1956, age:'Age 65', loc:'Nagpur · Delhi',
-    en:{t:'Conversion to Buddhism', x:'On 14 October 1956 in Nagpur, embraces Buddhism with nearly five lakh followers — the largest religious conversion in modern history.'},
-    hi:{t:'बौद्ध धर्म ग्रहण', x:'14 अक्तूबर 1956 को नागपुर में लगभग पाँच लाख अनुयायियों के साथ बौद्ध धर्म स्वीकार किया।'},
-    te:{t:'బౌద్ధ ధర్మ స్వీకరణ', x:'౧౯౫౬ అక్టోబర్ ౧౪న నాగ్‌పూర్‌లో బౌద్ధధర్మాన్ని స్వీకరించారు.'}},
+  {year:1891, age:'Born', loc:'Mhow, MP', date:'14 April', context:'British India',
+    en:{t:'Birth at Mhow', x:'Bhimrao Ramji Ambedkar is born on 14 April 1891 in the military cantonment of Mhow (now Dr. Ambedkar Nagar), Madhya Pradesh, the 14th and last child of Ramji Maloji Sakpal, a Subedar in the British Indian Army, and Bhimabai. Born into the Mahar caste, he experiences the indignities of untouchability from his earliest school years.',
+       facts:[['Father','Ramji Sakpal · Subedar'],['Mother','Bhimabai'],['14th','child of the family']],
+       q:'I was born into a caste that was not allowed to enter the school I would later return to teach in.',
+       qsrc:'— On his early years'},
+    hi:{t:'महू में जन्म', x:'भीमराव रामजी आम्बेडकर का जन्म 14 अप्रैल 1891 को महू (मध्य प्रदेश) के सैन्य छावनी में हुआ। पिता रामजी मालोजी सकपाल ब्रिटिश भारतीय सेना में सूबेदार थे, माता भीमाबाई। परिवार के 14वें और अंतिम संतान। महार जाति में जन्म लेने के कारण विद्यालय में अस्पृश्यता का सामना किया।',
+       facts:[['पिता','रामजी सकपाल · सूबेदार'],['माता','भीमाबाई'],['१४वीं','संतान']],
+       q:'मेरा जन्म ऐसी जाति में हुआ जिसे उस विद्यालय में प्रवेश की अनुमति नहीं थी जहाँ मैं बाद में पढ़ाने लौटा।',
+       qsrc:'— बचपन पर'},
+    te:{t:'మహౌలో జననం', x:'భీమ్‌రావ్ రామ్‌జీ అంబేడ్కర్ ౧౮౯౧ ఏప్రిల్ ౧౪న మహౌలో జన్మించారు. తండ్రి రామ్‌జీ సక్‌పాల్ బ్రిటిష్ సైన్యంలో సుబేదార్. తల్లి భీమాబాయి. కుటుంబంలో ౧౪వ సంతానం. మహర్ కులంలో జన్మించి బడిలోనే అంటరానితనం అనుభవించారు.',
+       facts:[['తండ్రి','రామ్‌జీ సక్‌పాల్'],['తల్లి','భీమాబాయి'],['౧౪వ','సంతానం']],
+       q:'నేను ఏ బడిలో తరువాత బోధించడానికి తిరిగి వచ్చానో, ఆ బడిలో ప్రవేశానికి అనుమతి లేని కులంలో పుట్టాను.',
+       qsrc:'— బాల్యం గురించి'}},
+
+  {year:1907, age:'Age 16', loc:'Bombay', date:'School Leaving', context:'British Bombay Presidency',
+    en:{t:'Matriculation', x:'First "untouchable" in his region to pass the matriculation examination — a public celebration is held in his honour, where Krishnaji Arjun Keluskar presents him a biography of the Buddha. The encounter plants the seed of his lifelong study of Buddhist thought.',
+       facts:[['First','untouchable matriculate'],['Gift','Biography of the Buddha'],['Mentor','K.A. Keluskar']],
+       q:'A book given in childhood can change the direction of an entire life.',
+       qsrc:'— Reflecting on his school years'},
+    hi:{t:'मैट्रिक उत्तीर्ण', x:'अपने क्षेत्र के पहले "अछूत" जिन्होंने मैट्रिक की परीक्षा उत्तीर्ण की। उनके सम्मान में सार्वजनिक समारोह आयोजित हुआ, जहाँ कृष्णाजी अर्जुन केलुस्कर ने उन्हें बुद्ध की जीवनी भेंट की।',
+       facts:[['प्रथम','अछूत मैट्रिक'],['उपहार','बुद्ध की जीवनी'],['मार्गदर्शक','के.ए. केलुस्कर']],
+       q:'बचपन में दी गई पुस्तक पूरे जीवन की दिशा बदल सकती है।',
+       qsrc:'— विद्यालयी वर्षों पर'},
+    te:{t:'మెట్రిక్యులేషన్', x:'తన ప్రాంతంలో మెట్రిక్యులేషన్ ఉత్తీర్ణుడైన మొదటి "అంటరాని" వ్యక్తి. ఆయన గౌరవార్థం బహిరంగ సన్మానం, దానిలో కృష్ణాజీ అర్జున్ కేళుస్కర్ బుద్ధుని జీవిత చరిత్రను బహుమతిగా ఇచ్చారు.',
+       facts:[['మొదటి','అంటరాని మెట్రిక్'],['బహుమతి','బుద్ధుని జీవితం'],['గురువు','K.A. కేళుస్కర్']],
+       q:'బాల్యంలో ఇచ్చిన పుస్తకం జీవితపు దిశను మార్చగలదు.',
+       qsrc:'— పాఠశాల సంవత్సరాలపై'}},
+
+  {year:1913, age:'Age 22', loc:'New York · USA', date:'Sept 1913', context:'Columbia University',
+    en:{t:'Columbia University', x:'Awarded a scholarship by the Maharaja of Baroda to study at Columbia University, New York. Earns MA in 1915 and PhD in 1927 with thesis "The Problem of the Rupee". Studies under John Dewey, whose pragmatism shapes Ambedkar\'s constitutional thinking.',
+       facts:[['Scholarship','Maharaja of Baroda'],['Teacher','John Dewey'],['Awards','MA 1915 · PhD 1927']],
+       q:'Cultivation of mind should be the ultimate aim of human existence.',
+       qsrc:'— Often-quoted maxim'},
+    hi:{t:'कोलंबिया विश्वविद्यालय', x:'बड़ौदा के महाराजा से छात्रवृत्ति पाकर कोलंबिया विश्वविद्यालय में अध्ययन। 1915 में MA, 1927 में "रुपये की समस्या" शोध प्रबंध से PhD। जॉन डेवी के मार्गदर्शन में अध्ययन।',
+       facts:[['छात्रवृत्ति','बड़ौदा महाराजा'],['शिक्षक','जॉन डेवी'],['उपलब्धि','MA · PhD']],
+       q:'मन की खेती मानव अस्तित्व का अंतिम लक्ष्य होना चाहिए।',
+       qsrc:'— प्रसिद्ध सूत्र'},
+    te:{t:'కొలంబియా యూనివర్సిటీ', x:'బరోడా మహారాజు స్కాలర్‌షిప్‌తో కొలంబియా యూనివర్సిటీలో చదువు. ౧౯౧౫లో MA, ౧౯౨౭లో "ది ప్రాబ్లమ్ ఆఫ్ ద రూపీ" థీసిస్‌తో PhD. జాన్ డ్యూయీ శిష్యత్వం.',
+       facts:[['స్కాలర్‌షిప్','బరోడా మహారాజు'],['గురువు','జాన్ డ్యూయీ'],['బిరుదులు','MA · PhD']],
+       q:'మనస్సు యొక్క సాగు మానవ ఉనికి యొక్క అంతిమ లక్ష్యం కావాలి.',
+       qsrc:'— ప్రసిద్ధ సూక్తి'}},
+
+  {year:1916, age:'Age 25', loc:'London · UK', date:'Oct 1916', context:'LSE & Gray\'s Inn',
+    en:{t:'London School of Economics', x:'Enrols at LSE for D.Sc. in Economics and at Gray\'s Inn to train for the Bar — a rare double-track that shapes both his economic and constitutional thought. Presents his first major academic paper, "Castes in India: Their Mechanism, Genesis and Development", at Columbia in May 1916.',
+       facts:[['Degree','D.Sc. Economics'],['Bar','Gray\'s Inn'],['Paper','Castes in India · 1916']],
+       q:'Caste is not a division of labour. It is a division of labourers.',
+       qsrc:'— Castes in India, 1916'},
+    hi:{t:'लंदन स्कूल ऑफ इकोनॉमिक्स', x:'LSE में अर्थशास्त्र में D.Sc. और ग्रे\'स इन में बैरिस्टर प्रशिक्षण। दोहरी पटरी जिसने आर्थिक और संवैधानिक दोनों चिंतन को आकार दिया।',
+       facts:[['उपाधि','D.Sc. अर्थशास्त्र'],['बार','ग्रे\'स इन'],['पत्र','भारत में जातियाँ']],
+       q:'जाति श्रम का विभाजन नहीं है। यह श्रमिकों का विभाजन है।',
+       qsrc:'— भारत में जातियाँ, 1916'},
+    te:{t:'లండన్ స్కూల్ ఆఫ్ ఎకనామిక్స్', x:'LSEలో D.Sc. ఆర్థికశాస్త్రం, గ్రేస్ ఇన్‌లో బారిష్టర్ శిక్షణ. ఆర్థిక మరియు రాజ్యాంగ ఆలోచనలను రూపొందించిన ద్వంద్వ మార్గం.',
+       facts:[['డిగ్రీ','D.Sc.'],['బార్','గ్రేస్ ఇన్'],['పేపర్','కులాలు · ౧౯౧౬']],
+       q:'కులం శ్రమ విభజన కాదు. ఇది శ్రామికుల విభజన.',
+       qsrc:'— భారత్‌లో కులాలు, ౧౯౧౬'}},
+
+  {year:1927, age:'Age 36', loc:'Mahad · Maharashtra', date:'20 March', context:'Mahad Satyagraha',
+    en:{t:'Mahad Satyagraha', x:'Leads thousands of Dalits to drink from the public Chavdar tank — asserting the right of every citizen to use public water. The first organised non-violent civil-rights agitation in modern India. The tank water is later ritually "purified" by upper-caste residents; the symbolic stake is now international news.',
+       facts:[['Participants','~10,000'],['Location','Chavdar Tank'],['Symbolic','Right to public water']],
+       q:'We are not going to take water from the tank merely because we are thirsty. We are going to assert that we, too, are human beings.',
+       qsrc:'— Mahad address, 20 March 1927'},
+    hi:{t:'महाड़ सत्याग्रह', x:'सार्वजनिक चवदार तालाब से जल पीने के लिए हजारों दलितों का नेतृत्व। आधुनिक भारत का पहला संगठित अहिंसक नागरिक-अधिकार आंदोलन।',
+       facts:[['सहभागी','~१०,०००'],['स्थान','चवदार तालाब'],['प्रतीक','जल का अधिकार']],
+       q:'हम तालाब से पानी इसलिए नहीं ले रहे क्योंकि हम प्यासे हैं। हम कह रहे हैं कि हम भी मनुष्य हैं।',
+       qsrc:'— महाड़ भाषण, 20 मार्च 1927'},
+    te:{t:'మహాడ్ సత్యాగ్రహం', x:'వేలాది దళితులను చౌదర్ చెరువు నుండి నీరు త్రాగడానికి నడిపించారు. ఆధునిక భారత మొదటి సంఘటిత అహింసా పౌర హక్కుల ఉద్యమం.',
+       facts:[['పాల్గొన్నవారు','~౧౦,౦౦౦'],['స్థలం','చౌదర్ చెరువు'],['ప్రతీక','నీటి హక్కు']],
+       q:'మేము దాహంగా ఉన్నందున చెరువు నుండి నీరు తీసుకోవట్లేదు. మేమూ మనుషులం అని చెప్పడానికి తీసుకుంటున్నాం.',
+       qsrc:'— మహాడ్ ప్రసంగం, ౧౯౨౭'}},
+
+  {year:1930, age:'Age 39', loc:'London · UK', date:'Nov 1930', context:'Round Table Conferences',
+    en:{t:'Round Table Conferences', x:'Represents the Depressed Classes at the Round Table Conferences in London (1930–32) — argues for separate electorates that later become reserved seats. The Poona Pact with Gandhi in September 1932 settles the matter as reserved seats within a joint electorate.',
+       facts:[['Conferences','Three rounds, 1930-32'],['Outcome','Poona Pact, 1932'],['Reserved seats','within joint electorate']],
+       q:'I want political power for my community because political power is the master-key with which we can open every door.',
+       qsrc:'— Round Table address, 1930'},
+    hi:{t:'गोलमेज सम्मेलन', x:'लंदन में गोलमेज सम्मेलनों (1930–32) में अवसादित वर्गों का प्रतिनिधित्व। पृथक निर्वाचन की वकालत जो बाद में आरक्षित सीटें बनीं। 1932 का पूना समझौता।',
+       facts:[['सम्मेलन','तीन दौर'],['परिणाम','पूना समझौता'],['आरक्षित सीटें','संयुक्त निर्वाचन']],
+       q:'मुझे अपने समुदाय के लिए राजनीतिक शक्ति चाहिए, क्योंकि राजनीतिक शक्ति वह कुंजी है जो हर दरवाज़ा खोल सकती है।',
+       qsrc:'— गोलमेज भाषण, 1930'},
+    te:{t:'రౌండ్ టేబుల్ సమావేశాలు', x:'లండన్‌లో రౌండ్ టేబుల్ సమావేశాల్లో (౧౯౩౦-౩౨) వెనుకబడిన వర్గాల ప్రాతినిధ్యం. ప్రత్యేక నియోజక వర్గాల వాదన; ౧౯౩౨ పూనా ఒప్పందం.',
+       facts:[['సమావేశాలు','మూడు దఫాలు'],['ఫలితం','పూనా ఒప్పందం'],['రిజర్వ్','ఉమ్మడి నియోజక']],
+       q:'రాజకీయ శక్తి అన్ని ద్వారాలను తెరిచే మాస్టర్ కీ. అది నా సమాజానికి కావాలి.',
+       qsrc:'— రౌండ్ టేబుల్, ౧౯౩౦'}},
+
+  {year:1936, age:'Age 45', loc:'Lahore · Punjab', date:'December', context:'Jat-Pat-Todak Mandal',
+    en:{t:'Annihilation of Caste', x:'Drafts what becomes one of the most influential anti-caste texts ever written. The Jat-Pat-Todak Mandal cancels the address after reading the manuscript. He publishes it himself in December 1936. The book has never been out of print since. Gandhi reviews it in Harijan; Ambedkar responds in print over 40 pages.',
+       facts:[['Self-published','December 1936'],['Editions','Never out of print'],['Critique','Gandhi · 40-page reply']],
+       q:'You cannot build anything on the foundations of caste. You cannot build a nation, you cannot build a morality.',
+       qsrc:'— Annihilation of Caste, §24'},
+    hi:{t:'जाति का उन्मूलन', x:'जाति-विरोधी सबसे प्रभावशाली ग्रंथ। जात-पात तोड़क मंडल ने भाषण रद्द कर दिया; उन्होंने स्वयं प्रकाशित किया। 1936 से अब तक प्रकाशन में।',
+       facts:[['स्वप्रकाशित','दिसंबर 1936'],['संस्करण','कभी समाप्त नहीं'],['विमर्श','गांधी · 40 पृष्ठ']],
+       q:'जाति की नींव पर कुछ नहीं बनाया जा सकता। न राष्ट्र, न नैतिकता।',
+       qsrc:'— जाति का उन्मूलन'},
+    te:{t:'అనిహిలేషన్ ఆఫ్ క్యాస్ట్', x:'కులవ్యతిరేక రచనల్లో అత్యంత ప్రభావవంతమైనది. జాత్-పాట్-తోడక్ మండల్ ప్రసంగాన్ని రద్దు చేస్తే, తనే ప్రచురించారు. ౧౯౩౬ నుండి నిరంతరం ముద్రణలో.',
+       facts:[['స్వీయ ప్రచురణ','డిసెంబర్ ౧౯౩౬'],['ఎడిషన్‌లు','నిరంతరం'],['విమర్శ','గాంధీ · ౪౦ పేజీలు']],
+       q:'కుల పునాదిపై దేన్నీ నిర్మించలేరు. దేశాన్ని, నైతికతను ఏదీ.',
+       qsrc:'— అనిహిలేషన్ ఆఫ్ క్యాస్ట్'}},
+
+  {year:1947, age:'Age 56', loc:'New Delhi', date:'29 August', context:'Constituent Assembly',
+    en:{t:'Chairman, Drafting Committee', x:'Independent India\'s first Law Minister. On 29 August 1947, the Constituent Assembly elects him Chairman of the Drafting Committee — the post that will shape every clause of the Constitution. He leads a seven-member committee through 2 years, 11 months, 18 days of drafting.',
+       facts:[['Role','Chairman, Drafting Cmte'],['Committee','7 members'],['Also','First Law Minister']],
+       q:'Constitution is not a mere lawyers\' document. It is a vehicle of life, and its spirit is always the spirit of age.',
+       qsrc:'— Constituent Assembly, 1949'},
+    hi:{t:'अध्यक्ष, मसौदा समिति', x:'स्वतंत्र भारत के पहले विधि मंत्री। 29 अगस्त 1947 को मसौदा समिति के अध्यक्ष चुने गए। सात सदस्यीय समिति का नेतृत्व। 2 साल, 11 माह, 18 दिन का मसौदा निर्माण।',
+       facts:[['पद','अध्यक्ष, मसौदा समिति'],['समिति','७ सदस्य'],['तथा','प्रथम विधि मंत्री']],
+       q:'संविधान केवल वकीलों का दस्तावेज़ नहीं है। यह जीवन का वाहन है।',
+       qsrc:'— संविधान सभा, 1949'},
+    te:{t:'డ్రాఫ్టింగ్ కమిటీ చైర్మన్', x:'స్వతంత్ర భారత మొదటి న్యాయ మంత్రి. ౧౯౪౭ ఆగస్టు ౨౯న డ్రాఫ్టింగ్ కమిటీ చైర్మన్‌గా ఎన్నిక. ఏడుగురి సభ్యుల కమిటీ. ౨ సంవత్సరాలు, ౧౧ నెలలు, ౧౮ రోజుల రచన.',
+       facts:[['పదవి','చైర్మన్'],['కమిటీ','౭ సభ్యులు'],['మరియు','మొదటి న్యాయ మంత్రి']],
+       q:'రాజ్యాంగం కేవలం న్యాయవాదుల పత్రం కాదు; ఇది జీవితపు వాహనం.',
+       qsrc:'— రాజ్యాంగ సభ, ౧౯౪౯'}},
+
+  {year:1950, age:'Age 59', loc:'New Delhi', date:'26 January', context:'Republic Day',
+    en:{t:'Constitution Adopted', x:'On 26 January 1950 the Constitution of India comes into force. The longest written constitution of any sovereign country in the world. 395 articles, 22 parts, 12 schedules at adoption. India becomes a sovereign democratic republic — the title "Socialist Secular" added later by the 42nd Amendment in 1976.',
+       facts:[['Articles','395 originally'],['Parts · Schedules','22 · 12'],['World\'s','Longest constitution']],
+       q:'If I find the Constitution being misused, I shall be the first to burn it.',
+       qsrc:'— Rajya Sabha, 1953'},
+    hi:{t:'संविधान लागू', x:'26 जनवरी 1950 को भारत का संविधान लागू। विश्व का सबसे लंबा लिखित संविधान। 395 अनुच्छेद, 22 भाग, 12 अनुसूचियाँ। भारत प्रभुत्व-संपन्न लोकतंत्रात्मक गणराज्य।',
+       facts:[['अनुच्छेद','मूलतः ३९५'],['भाग · अनुसूचियाँ','२२ · १२'],['विश्व का','सबसे लंबा']],
+       q:'यदि संविधान का दुरुपयोग होते देखूँ, तो उसे जलाने वाला पहला व्यक्ति मैं होऊँगा।',
+       qsrc:'— राज्यसभा, 1953'},
+    te:{t:'రాజ్యాంగం అమల్లోకి', x:'౧౯౫౦ జనవరి ౨౬న భారత రాజ్యాంగం అమల్లోకి. ప్రపంచంలో అత్యంత పెద్ద లిఖిత రాజ్యాంగం. ౩౯౫ అధికరణలు, ౨౨ భాగాలు, ౧౨ షెడ్యూళ్లు. భారత్ సార్వభౌమ ప్రజాస్వామిక గణతంత్రం.',
+       facts:[['అధికరణలు','మూలంగా ౩౯౫'],['భాగాలు · షెడ్యూళ్లు','౨౨ · ౧౨'],['ప్రపంచం','అత్యంత పెద్దది']],
+       q:'రాజ్యాంగం దుర్వినియోగమవుతున్నదని కనిపిస్తే, దాన్ని కాల్చే మొదటి వ్యక్తి నేనే అవుతాను.',
+       qsrc:'— రాజ్యసభ, ౧౯౫౩'}},
+
+  {year:1956, age:'Age 65', loc:'Nagpur · Delhi', date:'14 Oct & 6 Dec', context:'Deekshabhoomi',
+    en:{t:'Conversion to Buddhism', x:'On 14 October 1956 in Nagpur, embraces Buddhism with nearly five lakh followers — the largest religious conversion in modern history. Takes the 22 Vows. Passes away 53 days later, on 6 December 1956, leaving the manuscript of "The Buddha and his Dhamma" for posthumous publication.',
+       facts:[['Followers','~5 lakh, in one day'],['22 Vows','renouncing Hindu deities'],['Mahaparinirvana','6 December 1956']],
+       q:'I will follow the Noble Eightfold Path of the Buddha. I have made this conversion of my own free will.',
+       qsrc:'— From the 22 Vows, Nagpur 1956'},
+    hi:{t:'बौद्ध धर्म ग्रहण', x:'14 अक्तूबर 1956 को नागपुर में लगभग पाँच लाख अनुयायियों के साथ बौद्ध धर्म स्वीकार। 22 प्रतिज्ञाएँ। 53 दिन बाद, 6 दिसंबर 1956 को महापरिनिर्वाण।',
+       facts:[['अनुयायी','~५ लाख, एक दिन'],['२२ प्रतिज्ञाएँ','हिंदू देवताओं का त्याग'],['महापरिनिर्वाण','६ दिसंबर १९५६']],
+       q:'मैं बुद्ध के अष्टांगिक मार्ग का पालन करूँगा। यह धर्मांतरण मैंने स्वेच्छा से किया है।',
+       qsrc:'— २२ प्रतिज्ञाओं से, नागपुर १९५६'},
+    te:{t:'బౌద్ధ ధర్మ స్వీకరణ', x:'౧౯౫౬ అక్టోబర్ ౧౪న నాగ్‌పూర్‌లో సుమారు ఐదు లక్షల అనుచరులతో బౌద్ధం స్వీకరించారు. ౨౨ ప్రతిజ్ఞలు. ౫౩ రోజుల తర్వాత, డిసెంబర్ ౬, ౧౯౫౬న మహాపరినిర్వాణం.',
+       facts:[['అనుచరులు','~౫ లక్షలు'],['౨౨ ప్రతిజ్ఞలు','హిందూ దేవతలను త్యజించడం'],['మహాపరినిర్వాణం','డిసెంబర్ ౬, ౧౯౫౬']],
+       q:'బుద్ధుని అష్టాంగ మార్గాన్ని అనుసరిస్తాను. ఈ మతమార్పిడిని నేను స్వేచ్ఛగా చేస్తున్నాను.',
+       qsrc:'— ౨౨ ప్రతిజ్ఞల నుండి, నాగ్‌పూర్ ౧౯౫౬'}},
 ];
 
 const track = document.getElementById('tl-track');
@@ -2038,7 +2829,11 @@ function selectEvent(i){
   document.querySelectorAll('.tl-event').forEach(e => e.classList.remove('active'));
   document.querySelectorAll('.tl-event')[i].classList.add('active');
   const e = events[i];
+
   document.querySelector('#tl-d-year').textContent = e.year;
+  document.querySelector('#tl-d-loc').textContent = e.loc;
+  document.querySelector('#tl-d-age').textContent = e.date + ' · ' + e.context;
+
   document.querySelector('#tl-d-title').innerHTML = `
     <span lang-block="en">${e.en.t}</span>
     <span lang-block="hi">${e.hi.t}</span>
@@ -2047,6 +2842,28 @@ function selectEvent(i){
     <span lang-block="en">${e.en.x}</span>
     <span lang-block="hi">${e.hi.x}</span>
     <span lang-block="te">${e.te.x}</span>`;
+
+  // Facts row — uses EN/HI/TE per-language facts
+  const factsEl = document.querySelector('#tl-d-facts');
+  if (factsEl) {
+    factsEl.innerHTML = ['en','hi','te'].map(lang => {
+      const facts = e[lang].facts || [];
+      return `<div lang-block="${lang}" style="display:flex;gap:clamp(12px, 1.4vw, 20px);flex-wrap:wrap;width:100%">` +
+        facts.map(([lbl, val]) => `<div class="tl-d-fact"><div class="lbl">${lbl}</div><div class="val">${val}</div></div>`).join('') +
+        `</div>`;
+    }).join('');
+  }
+
+  // Quote block
+  document.querySelector('#tl-d-quote').innerHTML = `
+    <span lang-block="en">${e.en.q}</span>
+    <span lang-block="hi">${e.hi.q}</span>
+    <span lang-block="te">${e.te.q}</span>`;
+  document.querySelector('#tl-d-quote-src').innerHTML = `
+    <span lang-block="en">${e.en.qsrc}</span>
+    <span lang-block="hi">${e.hi.qsrc}</span>
+    <span lang-block="te">${e.te.qsrc}</span>`;
+
   // Update progress bar (1891 → 1956 = 65 years)
   const pct = ((e.year - 1891) / 65) * 100;
   const fill = document.getElementById('bar-fill');
@@ -2282,6 +3099,7 @@ function selectBook(i){
           <div class="bs"><div class="n">${b.copies}</div><div class="l">In Print</div></div>
           <div class="bs"><div class="n">3</div><div class="l">Languages</div></div>
         </div>
+        ${b.key === 'b1' ? `<button onclick="openSub('aoc')" style="margin-top:18px;padding:12px 22px;background:linear-gradient(180deg, var(--saffron), var(--saffron-2));color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:clamp(8.6px, 0.573vw, 16.5px);letter-spacing:2.5px;text-transform:uppercase;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:10px;box-shadow:0 6px 16px var(--saffron-glow)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Open Flipbook · BOQ #12</button>` : ''}
       </div>
     </div>
     <div class="book-excerpt">
@@ -2335,6 +3153,223 @@ function dismissAttract(){
   resetIdle();
 }
 ['click','touchstart','keydown'].forEach(ev => document.addEventListener(ev, resetIdle));
+
+/* ============ SUBSCREENS (open / close) ============ */
+function openSub(name){
+  closeModal();
+  document.querySelectorAll('.subscreen').forEach(s => s.classList.remove('show'));
+  const el = document.getElementById('sub-'+name);
+  if (el) el.classList.add('show');
+  if (name === 'reader') initReader();
+  if (name === 'aoc') initFlipbook();
+  resetIdle();
+}
+function closeSub(){
+  document.querySelectorAll('.subscreen').forEach(s => s.classList.remove('show'));
+  resetIdle();
+}
+
+/* ============ CONSTITUTION READER ============ */
+const readerArticles = [
+  {id:'preamble', section:'preamble', no:'P', short:'Preamble', title:{en:'The Preamble', hi:'प्रस्तावना', te:'ప్రవేశిక'}, sub:{en:'We the People…', hi:'हम भारत के लोग…', te:'మనం, భారత ప్రజలం…'},
+    clauses:[
+      {n:'1', en:'WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a <strong>SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC</strong> and to secure to all its citizens:', hi:'हम, भारत के लोग, भारत को एक <strong>संपूर्ण प्रभुत्व सम्पन्न समाजवादी पंथनिरपेक्ष लोकतंत्रात्मक गणराज्य</strong> बनाने के लिए दृढ़ संकल्पित होकर…', te:'మనం, భారత ప్రజలం, భారతదేశాన్ని <strong>సర్వసత్తాక, సామ్యవాద, లౌకిక, ప్రజాస్వామిక గణతంత్ర రాజ్యం</strong>గా ఏర్పరచడానికి హృదయపూర్వకంగా నిర్ణయించుకుని…'},
+      {n:'2', en:'<strong>JUSTICE</strong>, social, economic and political; <strong>LIBERTY</strong> of thought, expression, belief, faith and worship; <strong>EQUALITY</strong> of status and of opportunity; and to promote among them all <strong>FRATERNITY</strong>…', hi:'<strong>न्याय</strong>, सामाजिक, आर्थिक और राजनैतिक; <strong>स्वतंत्रता</strong>, <strong>समानता</strong> और <strong>बंधुता</strong>…', te:'<strong>న్యాయం</strong>, <strong>స్వేచ్ఛ</strong>, <strong>సమానత్వం</strong> మరియు <strong>సౌభ్రాతృత్వం</strong>…'},
+    ],
+    ann:{en:'Drafted by the Drafting Committee under Dr. Ambedkar; adopted 26 November 1949; in force 26 January 1950.', hi:'मसौदा समिति द्वारा रचित; 26 नवंबर 1949 को अंगीकृत; 26 जनवरी 1950 को लागू।', te:'డ్రాఫ్టింగ్ కమిటీ రచన; ౧౯౪౯ నవంబర్ ౨౬న ఆమోదం; ౧౯౫౦ జనవరి ౨౬న అమల్లోకి.'}
+  },
+  {id:'art14', section:'rights', no:'14', short:'Equality before law', title:{en:'Article 14 · Equality before law', hi:'अनुच्छेद 14 · विधि के समक्ष समता', te:'అధికరణ ౧౪ · చట్టం ముందు సమానత్వం'}, sub:{en:'Part III · Right to Equality', hi:'भाग III · समानता का अधिकार', te:'భాగం III · సమానత్వ హక్కు'},
+    clauses:[{n:'14', en:'The State shall not deny to any person <strong>equality before the law</strong> or the <strong>equal protection of the laws</strong> within the territory of India.', hi:'राज्य, भारत के राज्यक्षेत्र में किसी व्यक्ति को विधि के समक्ष <strong>समता</strong> से या विधियों के <strong>समान संरक्षण</strong> से वंचित नहीं करेगा।', te:'రాష్ట్రం, భారత భూభాగంలో ఏ వ్యక్తికీ చట్టం ముందు <strong>సమానత్వాన్ని</strong> లేదా చట్టాల <strong>సమాన రక్షణను</strong> నిరాకరించరాదు.'}],
+    ann:{en:'In E. P. Royappa (1974), the Supreme Court read Article 14 as the antithesis of arbitrariness. Maneka Gandhi (1978) bound it to Articles 19 and 21 — the "golden triangle".', hi:'ई.पी. रोयप्पा (1974) में सर्वोच्च न्यायालय ने इसे मनमानेपन का विलोम बताया।', te:'E.P. రోయప్పా (౧౯౭౪) తీర్పులో సుప్రీం కోర్టు దీన్ని ఏకపక్షతకు వ్యతిరేకంగా వ్యాఖ్యానించింది.'}
+  },
+  {id:'art15', section:'rights', no:'15', short:'No discrimination', title:{en:'Article 15 · Prohibition of discrimination', hi:'अनुच्छेद 15 · भेदभाव का प्रतिषेध', te:'అధికరణ ౧౫ · వివక్షత నిషేధం'}, sub:{en:'Part III · Right to Equality', hi:'भाग III', te:'భాగం III'},
+    clauses:[
+      {n:'15(1)', en:'The State shall <strong>not discriminate</strong> against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them.', hi:'राज्य किसी नागरिक के विरुद्ध केवल धर्म, मूलवंश, जाति, लिंग, जन्म स्थान के आधार पर <strong>भेदभाव नहीं</strong> करेगा।', te:'రాష్ట్రం, ఏ పౌరుడిపైనా కేవలం మతం, జాతి, కులం, లింగం, జన్మస్థలం ఆధారంగా <strong>వివక్ష చూపరాదు</strong>.'},
+      {n:'15(4)', en:'Nothing shall prevent the State from making any <strong>special provision for the advancement</strong> of any socially and educationally backward classes of citizens or for the Scheduled Castes and the Scheduled Tribes.', hi:'राज्य पिछड़े वर्गों या अनुसूचित जाति/जनजाति के लिए विशेष प्रावधान कर सकता है।', te:'రాష్ట్రం వెనుకబడిన వర్గాలు, SC/ST కోసం ప్రత్యేక నిబంధనలు చేయవచ్చు.'},
+    ],
+    ann:{en:'Clause (4) — inserted by the First Amendment, 1951 — was added in response to the Madras case (State of Madras v. Champakam) and underpins the modern reservation framework.', hi:'खंड (4) — 1951 के पहले संशोधन द्वारा जोड़ा गया।', te:'క్లాజ్ (౪) — ౧౯౫౧ మొదటి సవరణ ద్వారా చేర్చబడింది.'}
+  },
+  {id:'art17', section:'rights', no:'17', short:'Untouchability', title:{en:'Article 17 · Abolition of untouchability', hi:'अनुच्छेद 17 · अस्पृश्यता का उन्मूलन', te:'అధికరణ ౧౭ · అంటరానితనం రద్దు'}, sub:{en:'Part III · Right to Equality', hi:'भाग III', te:'భాగం III'},
+    clauses:[{n:'17', en:'<strong>"Untouchability" is abolished</strong> and its practice in any form is forbidden. The enforcement of any disability arising out of "Untouchability" shall be an <strong>offence punishable</strong> in accordance with law.', hi:'<strong>"अस्पृश्यता" का अंत किया जाता है</strong> और किसी भी रूप में आचरण निषिद्ध है।', te:'<strong>"అంటరానితనం" రద్దు చేయబడింది</strong>; దాని ఏ రూపమైన ఆచరణా నిషేధించబడింది.'}],
+    ann:{en:'Operationalised through the Protection of Civil Rights Act, 1955 (originally the Untouchability Offences Act). Considered the most personal article in the Constitution for Dr. Ambedkar.', hi:'1955 के नागरिक अधिकार संरक्षण अधिनियम से क्रियान्वित।', te:'౧౯౫౫ పౌర హక్కుల చట్టం ద్వారా అమలు.'}
+  },
+  {id:'art19', section:'rights', no:'19', short:'Freedom of speech', title:{en:'Article 19 · Six freedoms', hi:'अनुच्छेद 19 · छह स्वतंत्रताएँ', te:'అధికరణ ౧౯ · ఆరు స్వేచ్ఛలు'}, sub:{en:'Part III · Right to Freedom', hi:'भाग III · स्वतंत्रता का अधिकार', te:'భాగం III · స్వేచ్ఛ హక్కు'},
+    clauses:[{n:'19(1)(a)', en:'All citizens shall have the right to <strong>freedom of speech and expression</strong>; (b) to assemble peaceably without arms; (c) to form associations or unions; (d) to move freely; (e) to reside and settle; (g) to practise any profession.', hi:'सभी नागरिकों को वाक् और अभिव्यक्ति की स्वतंत्रता, सभा, संगठन, यात्रा, निवास और व्यवसाय की स्वतंत्रता।', te:'వాక్ స్వాతంత్ర్యం, సమావేశ హక్కు, సంఘం ఏర్పాటు, ప్రయాణ, నివాస, వృత్తి స్వేచ్ఛ.'}],
+    ann:{en:'Reasonable restrictions allowed under sovereignty, integrity, public order, decency, contempt of court, defamation, incitement.', hi:'सार्वजनिक व्यवस्था, नैतिकता आदि के आधार पर उचित प्रतिबंध।', te:'సార్వభౌమత్వం, ప్రజా క్రమం ఆధారంగా సహేతుక నిర్బంధాలు.'}
+  },
+  {id:'art21', section:'rights', no:'21', short:'Right to life', title:{en:'Article 21 · Protection of life and liberty', hi:'अनुच्छेद 21 · प्राण और दैहिक स्वतंत्रता', te:'అధికరణ ౨౧ · జీవించే హక్కు'}, sub:{en:'Part III · Right to Life', hi:'भाग III', te:'భాగం III'},
+    clauses:[{n:'21', en:'<strong>No person shall be deprived of his life or personal liberty</strong> except according to procedure established by law.', hi:'<strong>किसी व्यक्ति को उसके प्राण या दैहिक स्वतंत्रता से</strong> विधि द्वारा स्थापित प्रक्रिया के अनुसार ही वंचित किया जा सकेगा।', te:'<strong>చట్టం ద్వారా స్థాపించబడిన ప్రక్రియ ప్రకారం</strong> తప్ప ఏ వ్యక్తికీ జీవించే హక్కును నిరాకరించరాదు.'}],
+    ann:{en:'Read expansively to include right to dignity (Maneka Gandhi, 1978), privacy (K.S. Puttaswamy, 2017), shelter, livelihood, clean environment.', hi:'व्यापक रूप से व्याख्यायित — गरिमा, निजता, आजीविका, स्वच्छ पर्यावरण।', te:'విస్తృతంగా వ్యాఖ్యానించబడింది — గౌరవం, గోప్యత, జీవనోపాధి.'}
+  },
+  {id:'art25', section:'rights', no:'25', short:'Freedom of religion', title:{en:'Article 25 · Freedom of religion', hi:'अनुच्छेद 25 · धर्म की स्वतंत्रता', te:'అధికరణ ౨౫ · మత స్వేచ్ఛ'}, sub:{en:'Part III · Right to Religion', hi:'भाग III', te:'భాగం III'},
+    clauses:[{n:'25(1)', en:'All persons are <strong>equally entitled</strong> to freedom of conscience and the right freely to <strong>profess, practise and propagate</strong> religion.', hi:'सभी व्यक्तियों को अंत:करण की स्वतंत्रता का तथा धर्म को <strong>अबाध रूप से मानने, आचरण और प्रचार करने</strong> का समान हक है।', te:'వ్యక్తులందరికీ అంతరాత్మ స్వేచ్ఛ మరియు మతాన్ని <strong>స్వేచ్ఛగా ఆచరించే, ప్రచారం చేసే</strong> హక్కు సమానం.'}],
+    ann:{en:'Subject to public order, morality, health. Allows the State to regulate secular activity associated with religious practice — and to provide for social welfare and reform.', hi:'सार्वजनिक व्यवस्था, नैतिकता, स्वास्थ्य के अधीन।', te:'ప్రజా క్రమం, నైతికత, ఆరోగ్యానికి లోబడి.'}
+  },
+  {id:'art32', section:'rights', no:'32', short:'Constitutional remedies', title:{en:'Article 32 · Heart of the Constitution', hi:'अनुच्छेद 32 · संविधान का हृदय', te:'అధికరణ ౩౨ · రాజ్యాంగపు హృదయం'}, sub:{en:'Part III · Right to Constitutional Remedies', hi:'भाग III', te:'భాగం III'},
+    clauses:[{n:'32', en:'The <strong>right to move the Supreme Court</strong> by appropriate proceedings for the <strong>enforcement of fundamental rights</strong>. The Supreme Court shall have power to issue writs — habeas corpus, mandamus, prohibition, quo warranto, certiorari.', hi:'<strong>मौलिक अधिकारों के प्रवर्तन</strong> के लिए उच्चतम न्यायालय में जाने का अधिकार।', te:'<strong>ప్రాథమిక హక్కుల అమలు</strong> కోసం సుప్రీం కోర్టును ఆశ్రయించే హక్కు.'}],
+    ann:{en:'Dr. Ambedkar called Article 32 "the very soul of the Constitution and the very heart of it." Without this, the rights chapter would be a dead letter.', hi:'डॉ. आम्बेडकर ने इसे "संविधान की आत्मा" कहा।', te:'డా. అంబేడ్కర్ దీన్ని "రాజ్యాంగపు ఆత్మ" అని పిలిచారు.'}
+  },
+  {id:'art44', section:'directives', no:'44', short:'Uniform Civil Code', title:{en:'Article 44 · Uniform Civil Code', hi:'अनुच्छेद 44 · समान नागरिक संहिता', te:'అధికరణ ౪౪ · ఏకరూప సివిల్ కోడ్'}, sub:{en:'Part IV · Directive Principles', hi:'भाग IV', te:'భాగం IV'},
+    clauses:[{n:'44', en:'The State shall <strong>endeavour to secure</strong> for the citizens a <strong>uniform civil code</strong> throughout the territory of India.', hi:'राज्य भारत के समस्त राज्यक्षेत्र में नागरिकों के लिए एक <strong>समान नागरिक संहिता</strong> प्राप्त कराने का प्रयास करेगा।', te:'రాష్ట్రం, భారతదేశమంతటా పౌరుల కోసం <strong>ఏకరూప సివిల్ కోడ్</strong>ను ప్రయత్నిస్తుంది.'}],
+    ann:{en:'Among the most debated Directive Principles. Goa is the only Indian state where a UCC currently applies, inherited from Portuguese law.', hi:'सबसे विवादित निदेशक तत्वों में से एक।', te:'అత్యంత చర్చనీయ ఆదేశక సూత్రాలలో ఒకటి.'}
+  },
+  {id:'art46', section:'directives', no:'46', short:'SC, ST welfare', title:{en:'Article 46 · Welfare of weaker sections', hi:'अनुच्छेद 46 · दुर्बल वर्गों का कल्याण', te:'అధికరణ ౪౬ · బలహీన వర్గాల సంక్షేమం'}, sub:{en:'Part IV · Directive Principles', hi:'भाग IV', te:'భాగం IV'},
+    clauses:[{n:'46', en:'The State shall <strong>promote with special care</strong> the educational and economic interests of the weaker sections, in particular the <strong>Scheduled Castes and the Scheduled Tribes</strong>, and shall protect them from social injustice.', hi:'राज्य कमजोर वर्गों के, विशेष रूप से <strong>SC और ST</strong>, शैक्षिक और आर्थिक हितों की विशेष सावधानी से अभिवृद्धि करेगा।', te:'రాష్ట్రం బలహీన వర్గాల, ముఖ్యంగా <strong>SC, ST</strong>ల విద్యా ఆర్థిక ప్రయోజనాలను ప్రత్యేక శ్రద్ధతో పెంపొందిస్తుంది.'}],
+    ann:{en:'Often cited as the constitutional anchor of affirmative action in higher education, employment and welfare schemes.', hi:'सकारात्मक कार्रवाई का संवैधानिक आधार।', te:'సానుకూల చర్యకు రాజ్యాంగ పునాది.'}
+  },
+  {id:'art51a', section:'duties', no:'51A', short:'Citizen duties', title:{en:'Article 51A · Fundamental Duties', hi:'अनुच्छेद 51A · मूल कर्तव्य', te:'అధికరణ ౫౧A · ప్రాథమిక విధులు'}, sub:{en:'Part IV-A · Fundamental Duties', hi:'भाग IV-A', te:'భాగం IV-A'},
+    clauses:[{n:'51A', en:'It shall be the duty of every citizen of India to <strong>abide by the Constitution</strong>; cherish the noble ideals of the freedom struggle; uphold the sovereignty, unity and integrity; defend the country and render national service; promote harmony; preserve culture; protect the environment; develop scientific temper; safeguard public property.', hi:'प्रत्येक नागरिक का कर्तव्य होगा कि वह <strong>संविधान का पालन करे</strong>; स्वतंत्रता आंदोलन के आदर्शों को संजोए; एकता और अखंडता की रक्षा करे।', te:'ప్రతి పౌరుని విధి — <strong>రాజ్యాంగాన్ని పాటించడం</strong>; స్వాతంత్ర్య పోరాట ఆదర్శాలను ఆదరించడం; ఐక్యత, సమగ్రతను కాపాడడం.'}],
+    ann:{en:'Inserted by the 42nd Amendment in 1976, on the recommendation of the Swaran Singh Committee. Non-justiciable but cited in case law as an interpretive aid.', hi:'१९७६ के ४२वें संशोधन द्वारा जोड़ा गया।', te:'౧౯౭౬ ౪౨వ సవరణ ద్వారా చేర్చబడింది.'}
+  },
+];
+
+let readerInited = false;
+function initReader(){
+  if (readerInited) return;
+  readerInited = true;
+  const buckets = {rights:[], directives:[], duties:[]};
+  readerArticles.forEach(a => { if (buckets[a.section]) buckets[a.section].push(a); });
+  ['rights','directives','duties'].forEach(sec => {
+    const list = document.getElementById('toc-'+sec);
+    buckets[sec].forEach(a => {
+      const item = document.createElement('div');
+      item.className = 'toc-item';
+      item.dataset.id = a.id;
+      item.innerHTML = `<span class="n">${a.no}</span><span>${a.short}</span>`;
+      item.onclick = () => selectArticleReader(a.id);
+      list.appendChild(item);
+    });
+  });
+  // preamble
+  document.querySelector('#toc-preamble .toc-item').onclick = () => selectArticleReader('preamble');
+  selectArticleReader('preamble');
+}
+
+function selectArticleReader(id){
+  document.querySelectorAll('.toc-item').forEach(i => i.classList.remove('active'));
+  const tocEl = document.querySelector(`.toc-item[data-id="${id}"]`) || document.querySelector('#toc-preamble .toc-item');
+  if (tocEl) tocEl.classList.add('active');
+  const a = readerArticles.find(x => x.id === id);
+  if (!a) return;
+  const main = document.getElementById('reader-main');
+  const clausesHTML = a.clauses.map(c => `
+    <div class="reader-clause">
+      <span class="cnum">Cl. ${c.n}</span>
+      <span lang-block="en">${c.en}</span>
+      <span lang-block="hi">${c.hi}</span>
+      <span lang-block="te">${c.te}</span>
+    </div>
+  `).join('');
+  main.innerHTML = `
+    <div class="reader-article-no">${a.sub.en ? '' : ''}<span lang-block="en">${a.sub.en}</span><span lang-block="hi">${a.sub.hi}</span><span lang-block="te">${a.sub.te}</span></div>
+    <h2 class="reader-article-title">
+      <span lang-block="en">${a.title.en}</span>
+      <span lang-block="hi">${a.title.hi}</span>
+      <span lang-block="te">${a.title.te}</span>
+    </h2>
+    ${clausesHTML}
+    <div class="reader-annotation">
+      <div class="lbl">Curator's Note</div>
+      <p><span lang-block="en">${a.ann.en}</span><span lang-block="hi">${a.ann.hi}</span><span lang-block="te">${a.ann.te}</span></p>
+    </div>
+  `;
+  // update audio title
+  const at = document.getElementById('audio-title');
+  if (at) at.textContent = a.title.en;
+  resetIdle();
+}
+
+/* TOC search filter */
+document.addEventListener('input', e => {
+  if (e.target && e.target.id === 'reader-search'){
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('.toc-item').forEach(i => {
+      const text = i.textContent.toLowerCase();
+      i.style.display = text.includes(q) ? 'flex' : 'none';
+    });
+  }
+});
+
+/* ============ ANNIHILATION OF CASTE FLIPBOOK ============ */
+const aocPages = [
+  {l:{title:'Prologue', open:'A speech that was never delivered.', body:[
+    'In 1936, the Jat-Pat-Todak Mandal of Lahore invited Dr. B. R. Ambedkar to deliver their presidential address at their annual conference. They had read his work; they wanted his voice. He sent them his text.',
+    'When they read what he had written, the organisers asked him to soften it. He refused. They cancelled the conference. He published the text himself, at his own expense.',
+    'What follows is the speech he prepared. It is, by any measure, the most consequential anti-caste argument in Indian intellectual history.'
+  ], fn:'PROLOGUE · PUBLISHED 1936'},
+   r:{title:'I · The Reformers and Their Failure', open:'Why have the reformers failed?', body:[
+    'I am sorry, I will not be with you. I have decided to publish this address. I had two reasons in mind when I wrote it. One was to give a candid expression of my views on the problem of caste. The other was to expose what I consider to be the futility of the methods adopted by the social reformers.',
+    'For a long time I believed that the cure for the disease of caste lay in the abolition of the priestcraft. I no longer hold this view. The caste system, as I have now come to understand it, is held in place not by the priest but by the doctrine. The priest is its servant; the doctrine is its master.',
+  ], fn:'Chapter I · §1—7'}},
+
+  {l:{title:'II · The Hindu Defence', open:'The Hindu defence of caste is wrong.', body:[
+    'The most common argument in defence of the caste system is that it is a division of labour. To this I reply: caste is not merely a division of labour, it is a division of labourers.',
+    'Civilised society undoubtedly needs division of labour. But in no civilised society is the division of labour accompanied by this unnatural division of labourers into watertight compartments. The caste system is not merely division of labourers — which is quite different from division of labour — it is a hierarchy in which the divisions of labourers are graded one above the other.',
+    'Such a system cannot be defended on the ground that it is natural. Nothing about it is natural.'
+  ], fn:'Chapter II · §3—5'},
+   r:{title:'III · Caste and Endogamy', open:'Caste survives because it polices marriage.', body:[
+    'What is a caste? Caste is an enclosed class. The unit of caste is the family. The mechanism by which caste maintains itself is endogamy — the prohibition of marriage outside the group.',
+    'Take away endogamy and caste dissolves in two generations. This is not a theoretical claim; it is an empirical one. Wherever inter-caste marriage has been practised in significant numbers, caste boundaries have weakened.',
+    'It is for this reason that the reformer who attacks caste at its surface — public dining, temple entry, the right to read the Vedas — leaves its foundation untouched. Caste lives in the bedroom long before it appears in the courtyard.'
+  ], fn:'Chapter III · §1—4'}},
+
+  {l:{title:'IV · The Real Method', open:'Reform must reach the doctrine.', body:[
+    'You cannot abolish caste without abolishing the religious sanctions which authorise it. The Hindu scriptures do not merely tolerate caste; they command it. So long as those scriptures are held inviolate, every caste reformer is asking his fellow Hindu to commit an act of religious disobedience.',
+    'I appeal to you to consider this. The reformer asks for compassion; the doctrine demands subordination. Compassion cannot win against doctrine. Doctrine must be replaced.',
+    'You must destroy the religion of the Shastras. Until you do that, no reform you propose has any chance of success.'
+  ], fn:'Chapter IV · §6—10'},
+   r:{title:'V · A New Foundation', open:'A new doctrine for a new society.', body:[
+    'What can replace the doctrine of caste? The answer is the doctrine of equality before God and equality before law. Liberty, equality and fraternity — these three. The French Revolution taught us this triad; it is the only foundation on which a modern society can stand.',
+    'I have been told that this is too radical. To those who say so, I reply: the radical position is not mine. The radical position is the one that asks half of humanity to accept indignity as a religious duty. I am asking for nothing more than what every other modern society now grants its citizens.',
+    'I have not come to argue. I have come to say what I know. You will hear me out or you will not. Either way, the argument has been made.'
+  ], fn:'Chapter V · CONCLUDED'}},
+
+  {l:{title:'Reception', open:'How the speech landed.', body:[
+    'Within a year of its self-publication, the text was being reprinted across India. M.K. Gandhi reviewed it in Harijan and disagreed; Ambedkar responded in print, and the exchange runs to roughly forty pages of careful argument.',
+    'It has never been out of print since 1936. It is taught in universities across India and abroad. The 2013 critical edition annotated by Arundhati Roy renewed its global conversation.',
+  ], fn:'AFTERWORD · 1936 → 2026'},
+   r:{title:'About this Edition', open:'First edition · self-published.', body:[
+    'This kiosk presents the first edition (December 1936), printed by the author at Bombay. The original physical copy is on display in the case to your right; this digital flipbook lets you read its full text, zoom on any page, and bookmark passages.',
+    'Three-language audio narration is available — touch the speaker icon in the top corner.',
+    'For the full text and scholarly apparatus, please visit the G2 Library on this floor.'
+  ], fn:'PRODUCED BY VKSTUDIO · 2026'}},
+];
+
+let fbIdx = 0;
+let fbInited = false;
+function initFlipbook(){
+  if (fbInited) return;
+  fbInited = true;
+  renderFlipbook();
+  document.getElementById('fb-prev').onclick = () => { if (fbIdx > 0) { fbIdx--; renderFlipbook(); resetIdle(); } };
+  document.getElementById('fb-next').onclick = () => { if (fbIdx < aocPages.length - 1) { fbIdx++; renderFlipbook(); resetIdle(); } };
+}
+function renderFlipbook(){
+  const p = aocPages[fbIdx];
+  const bookEl = document.getElementById('flipbook');
+  const pageL = (fbIdx * 2) + 1;
+  const pageR = pageL + 1;
+  bookEl.innerHTML = `
+    <div class="flip-page left">
+      <h3>${p.l.title}</h3>
+      ${p.l.open ? `<p class="opener">"${p.l.open}"</p>` : ''}
+      ${p.l.body.map(b => `<p>${b}</p>`).join('')}
+      <div class="footnote">${p.l.fn}</div>
+      <div class="page-num">${pageL}</div>
+    </div>
+    <div class="flip-page right">
+      <h3>${p.r.title}</h3>
+      ${p.r.open ? `<p class="opener">"${p.r.open}"</p>` : ''}
+      ${p.r.body.map(b => `<p>${b}</p>`).join('')}
+      <div class="footnote">${p.r.fn}</div>
+      <div class="page-num">${pageR}</div>
+    </div>
+  `;
+  document.getElementById('fb-prog').textContent = (fbIdx + 1) + ' / ' + aocPages.length;
+  document.getElementById('fb-prev').disabled = (fbIdx === 0);
+  document.getElementById('fb-next').disabled = (fbIdx === aocPages.length - 1);
+}
+
 </script>
 </body>
 </html>
